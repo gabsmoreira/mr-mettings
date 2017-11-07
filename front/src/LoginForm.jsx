@@ -5,6 +5,7 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import Slider from 'material-ui/Slider';
 import RaisedButton from 'material-ui/RaisedButton';
 import './css/materialize.css'
+
 import {amber500,amber700, blue500, grey300, grey400, grey200, grey600, grey800, grey900, grey500, grey50} from 'material-ui/styles/colors';
 
 
@@ -17,6 +18,7 @@ class LoginForm extends Component {
     this.state = {
       error : '',
       login : true,
+      image: './img/metting.jpg',
       colorLoginTab: grey500,
       colorRegisterTab:grey500,
       textFields : {
@@ -27,32 +29,14 @@ class LoginForm extends Component {
     }
   }
 
-  componentWillMount(){
-    document.body.style.backgroundColor = grey200
-;
-}
-componentWillUnmount(){
-    document.body.style.backgroundColor = null;
-}
+  
 
     render() {
 
-        const styles = {
-            headline: {
-                fontSize: 24,
-                paddingTop: 16,
-                marginBottom: 12,
-                fontWeight: 400,
-            },
-        };
-
-
         const style = {
             backgroundColor: grey50,
-            marginTop: '15%',
-            height:'120%',
             textAlign: 'center',
-            display: 'inline-block',
+            marginTop: '10%'
         };
 
         const formStyle={
@@ -69,11 +53,11 @@ componentWillUnmount(){
 
         return (
             <div className="LoginForm row">
-                <div className="col s12 m2 l2"> sdnkasn</div>
+                <div className="col s12 m2 l2"></div>
                 <div className="col s12 m8 l8">
                 <Paper style={style} zDepth={2}>
                 <Tabs inkBarStyle={{background:amber700}}>
-                    <Tab label="Login" style={{backgroundColor: this.state.colorLoginTab, width:300}} >
+                    <Tab label="Login" style={{backgroundColor: this.state.colorLoginTab}} >
                         <div>
                         <TextField
                             style={formStyle}
@@ -82,6 +66,7 @@ componentWillUnmount(){
                             underlineFocusStyle={{borderColor: amber700}}
                             floatingLabelShrinkStyle={{color:amber700}}/>
                         <br />
+                        
                         <TextField
                             style={formStyle}
                             floatingLabelText="Password"
@@ -93,7 +78,7 @@ componentWillUnmount(){
                         <RaisedButton label="Login" style={styleButton} backgroundColor={amber500}/>
                         </div>
                     </Tab>
-                    <Tab label="Register" style={{backgroundColor:this.state.colorRegisterTab, width:300}} >
+                    <Tab label="Register" style={{backgroundColor:this.state.colorRegisterTab}} >
                         <div>
                         <TextField
                             style={formStyle}
@@ -124,7 +109,7 @@ componentWillUnmount(){
                 </Tabs>
                 </Paper>
                 </div>
-                <div className="col s12 m2 l2"> sdnkasn</div>
+                <div className="col s12 m2 l2"></div>
 
 
              </div>
