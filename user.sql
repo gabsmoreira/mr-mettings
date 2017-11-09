@@ -1,4 +1,4 @@
-CREATE TABLE user (
+CREATE TABLE User (
     user_id INT NOT NULL AUTO INCREMENT,
     name VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL,
@@ -7,6 +7,6 @@ CREATE TABLE user (
     id_notification INT NOT NULL,
     PRIMARY KEY (user_id),
     FOREIGN KEY (id_schedule) REFERENCES schedule(schedule_id),
-    FOREIGN KEY (id_notification) REFERENCES notification(notification_id)
+    FOREIGN KEY (id_notification) REFERENCES notification(id)
 );
 

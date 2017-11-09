@@ -1,7 +1,27 @@
 CREATE TABLE group(
-    group_id int(11) not null auto_increment,
+    id int(11) not null auto_increment,
     title varchar(50) not null,
     duration int(5) not null,
+    id_user1 int(10),
+    id_user2 int(10),
+    id_user3 int(10),
+    id_user4 int(10),
+    id_user5 int(10),
+    id_user6 int(10),
+    id_user7 int(10),
+    id_user8 int(10),
+    id_user9 int(10),
+    id_user10 int(10),
+    FOREIGN KEY (id_user1) REFERENCES user(user_id),
+    FOREIGN KEY (id_user2) REFERENCES user(user_id),
+    FOREIGN KEY (id_user3) REFERENCES user(user_id),
+    FOREIGN KEY (id_user4) REFERENCES user(user_id),
+    FOREIGN KEY (id_user5) REFERENCES user(user_id),
+    FOREIGN KEY (id_user6) REFERENCES user(user_id),
+    FOREIGN KEY (id_user7) REFERENCES user(user_id),
+    FOREIGN KEY (id_user8) REFERENCES user(user_id),
+    FOREIGN KEY (id_user9) REFERENCES user(user_id),
+    FOREIGN KEY (id_user10) REFERENCES user(user_id),
     PRIMARY KEY (id)
 )
 
