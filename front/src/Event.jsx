@@ -33,7 +33,7 @@ class Event extends Component {
     render() {
         const styles = {
             chip: {
-              margin: 4,
+              margin: 7,
               visibility: this.state.hidden
             }
         };

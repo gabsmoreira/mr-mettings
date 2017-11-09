@@ -11,6 +11,8 @@ import Event from './Event';
 import Dialog from 'material-ui/Dialog';   
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem'; 
+import Snackbar from 'material-ui/Snackbar';
+
 
 import {
     Table,
@@ -36,6 +38,7 @@ class Calendar extends Component {
                 thursday:[],friday:[], saturday:[],
                 sunday:[]},
       open: false,
+      openSnackbar: false,
       valueStart: 0,
       valueStop: 0,
       valueDay: 0
@@ -53,7 +56,7 @@ class Calendar extends Component {
     createEvent = () => {
         console.log(this.existEvent(this.state.valueStart,this.state.valueStop,this.state.valueStart, this.state.valueDay));
         if (this.state.valueStart >= this.state.valueStop || this.existEvent(this.state.valueStart,this.state.valueStop,this.state.valueStart, this.state.valueDay)){
-            alert("n da")
+            this.setState({openSnackbar: true});
         }
         else{
             this.setState({open: false});
@@ -106,51 +109,50 @@ class Calendar extends Component {
 
     existEvent=(valueStart, valueStop, valueDay) =>{
         if (this.state.valueDay == 0){
-            for(var i = 0; i<this.state.events.monday.length, i++;){
-                console.log(this.state.events.monday[i].startTime);
-                if((String(this.state.events.monday[i].startTime) + ':00') == valueStart){
+            for(var i = 0; i<this.state.events.monday.length; i++){
+                if(this.state.events.monday[i].startTime === String(valueStart)+ ':00'){
                     return true;
                 }
             }
         }
         else if (this.state.valueDay == 1){
-            for(var i = 0; i<this.state.events.tuesday.length, i++;){
-                if(this.state.events.tuesday[i].startTime == valueStart){
+            for(var i = 0; i<this.state.events.tuesday.length; i++){
+                if(this.state.events.tuesday[i].startTime === String(valueStart)+ ':00'){
                     return true;
                 }
             }
         }
         else if (this.state.valueDay == 2){
-            for(var i = 0; i<this.state.events.wednesday.length, i++;){
-                if(this.state.events.wednesday[i].startTime == valueStart){
+            for(var i = 0; i<this.state.events.wednesday.length; i++){
+                if(this.state.events.wednesday[i].startTime === String(valueStart)+ ':00'){
                     return true;
                 }
             }
         }
         else if (this.state.valueDay == 3){
-            for(var i = 0; i<this.state.events.thursday.length, i++;){
-                if(this.state.events.thursday[i].startTime == valueStart){
+            for(var i = 0; i<this.state.events.thursday.length; i++){
+                if(this.state.events.thursday[i].startTime === String(valueStart)+ ':00'){
                     return true;
                 }
             }
         }
         else if (this.state.valueDay == 4){
-            for(var i = 0; i<this.state.events.friday.length, i++;){
-                if(this.state.events.friday[i].startTime == valueStart){
+            for(var i = 0; i<this.state.events.friday.length; i++){
+                if(this.state.events.friday[i].startTime === String(valueStart)+ ':00'){
                     return true;
                 }
             }
         }
         else if (this.state.valueDay == 5){
-            for(var i = 0; i<this.state.events.saturday.length, i++;){
-                if(this.state.events.saturday[i].startTime == valueStart){
+            for(var i = 0; i<this.state.events.saturday.length; i++){
+                if(this.state.events.saturday[i].startTime === String(valueStart)+ ':00'){
                     return true;
                 }
             }
         }
         else if (this.state.valueDay == 6){
-            for(var i = 0; i<this.state.events.sunday.length, i++;){
-                if(this.state.events.sunday[i].startTime == valueStart){
+            for(var i = 0; i<this.state.events.sunday.length; i++){
+                if(this.state.events.sunday[i].startTime === String(valueStart)+ ':00'){
                     return true;
                 }
             }
@@ -164,6 +166,11 @@ class Calendar extends Component {
     }
     handleChangeStop = (event, index, valueStop) => this.setState({valueStop});
     handleChangeDay = (event, index, valueDay) => this.setState({valueDay});
+    handleRequestClose = () => {
+        this.setState({
+          openSnackbar: false,
+        });
+      };
     
 
     render() {
@@ -300,6 +307,12 @@ class Calendar extends Component {
                     </TableRow>
                 </TableBody>
             </Table>
+            <Snackbar
+            open={this.state.openSnackbar}
+            message="Não foi possível adicionar"
+            autoHideDuration={4000}
+            onRequestClose={this.handleRequestClose}
+            />
         </div>    
                 
         );
