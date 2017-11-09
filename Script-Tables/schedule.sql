@@ -169,4 +169,5 @@ CREATE TABLE schedule (
     sunday_22 boolean,
     sunday_23 boolean,
     PRIMARY KEY (id)
+    FOREIGN KEY (id_user) REFERENCES user(user_id)
 );
