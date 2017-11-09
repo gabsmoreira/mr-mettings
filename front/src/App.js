@@ -8,6 +8,8 @@ import MapsPersonPin from 'material-ui/svg-icons/maps/person-pin';
 import Tabber from './Tabber'
 import LoginForm from './LoginForm'
 import Background from './img/metting.jpg';
+import Calendar from './Calendar'
+
 
 
 
@@ -33,7 +35,7 @@ class App extends Component {
     return (
       <div className="App">
         <MuiThemeProvider>
-          <LoginForm />
+          <Calendar />
         </MuiThemeProvider>
       </div>
     );

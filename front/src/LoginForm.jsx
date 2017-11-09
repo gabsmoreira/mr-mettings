@@ -48,7 +48,9 @@ class LoginForm extends Component {
         }
         const styleButton={
             color: amber700,
-            margin:12
+            margin:12,
+            width:'15%',
+            marginLeft: '5%'
         }
 
         return (
@@ -65,7 +67,7 @@ class LoginForm extends Component {
                             hintText=""
                             underlineFocusStyle={{borderColor: amber700}}
                             floatingLabelShrinkStyle={{color:amber700}}/>
-                        <br />
+                        
                         
                         <TextField
                             style={formStyle}
@@ -74,7 +76,6 @@ class LoginForm extends Component {
                             type="password"
                             underlineFocusStyle={{borderColor: amber700}}
                             floatingLabelShrinkStyle={{color:amber700}}/>
-                        <br />
                         <RaisedButton label="Login" style={styleButton} backgroundColor={amber500}/>
                         </div>
                     </Tab>
@@ -86,14 +87,12 @@ class LoginForm extends Component {
                             hintText=""
                             underlineFocusStyle={{borderColor: amber700}}
                             floatingLabelShrinkStyle={{color:amber700}}/>
-                        <br />
                         <TextField
                             style={formStyle}
                             floatingLabelText="Username"
                             hintText=""
                             underlineFocusStyle={{borderColor: amber700}}
                             floatingLabelShrinkStyle={{color:amber700}}/>
-                        <br />
                         <TextField
                             style={formStyle}
                             floatingLabelText="Password"
@@ -101,7 +100,6 @@ class LoginForm extends Component {
                             type="password"
                             underlineFocusStyle={{borderColor: amber700}}
                             floatingLabelShrinkStyle={{color:amber700}}/>
-                        <br />
                         <RaisedButton label="Register" style={styleButton} backgroundColor={amber500}/>
 
                         </div>
