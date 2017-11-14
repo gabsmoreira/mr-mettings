@@ -37,7 +37,6 @@ app.post('/register', function (req, res) {
     var name = req.body.name;
     var email = req.body.email;
     var password = req.body.password;
-    console.log("NAME", + name);
 
     console.log(name,email,password);
     connection.query("INSERT INTO user (name, email, password) values(?,?,?)",[name,email,password], function (error, results, fields) {
