@@ -253,7 +253,7 @@ class Calendar extends Component {
                   showRowHover={false}
                   stripedRows={true}
                   displayRowCheckbox={false}>
-                    <TableRow >
+                    <TableRow>
                         <TableRowColumn style={tableRowStyle}>
                             <div>
                             {this.state.events.monday.map( (row,index) => (
