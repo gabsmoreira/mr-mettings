@@ -1,6 +1,6 @@
-CREATE TABLE schedule (
+CREATE TABLE Schedule (
     id INT NOT NULL AUTO_INCREMENT,
-    user_id INT NOT NULL,
+    id_user INT NOT NULL,
     monday_6 boolean,
     monday_7 boolean,
     monday_8 boolean,
@@ -128,5 +128,5 @@ CREATE TABLE schedule (
     sunday_22 boolean,
     sunday_23 boolean,
     PRIMARY KEY (id)
-    FOREIGN KEY (user_id) REFERENCES user(id)
+    FOREIGN KEY (id_user) REFERENCES User(id)
 );
