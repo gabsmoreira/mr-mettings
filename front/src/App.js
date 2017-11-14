@@ -18,7 +18,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      auth : null,
+      auth : 'teste',
       loading : false,
       error : '',
       action : 'login'
@@ -35,7 +35,7 @@ class App extends Component {
     return (
       <div className="App">
         <MuiThemeProvider>
-          <Calendar />
+          <LoginForm />
         </MuiThemeProvider>
       </div>
     );
@@ -44,7 +44,8 @@ class App extends Component {
     return (
       <div className="App">
         <MuiThemeProvider>
-          VEM DE PAGINA PRINCIPAL
+          <Tabber />
+          <Calendar />
         </MuiThemeProvider>
 
       </div>
