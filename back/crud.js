@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/', function (req, res) {
-    res.send('Primeira requisição GET');
+    res.send('ITS WORKING');
 });
 
 app.listen(3001, function () {
@@ -18,7 +18,7 @@ app.listen(3001, function () {
 var connection = mysql.createConnection({
     host : 'localhost',
     user : 'root',
-    password : '160520',
+    password : '1234',
     database : 'mrmeetings'
     })
 
@@ -37,11 +37,12 @@ app.post('/register', function (req, res) {
     var name = req.body.name;
     var email = req.body.email;
     var password = req.body.password;
+    console.log("NAME", + name);
 
     console.log(name,email,password);
     connection.query("INSERT INTO user (name, email, password) values(?,?,?)",[name,email,password], function (error, results, fields) {
         if (error) throw error;   
-            res.json(fields)
+            res.json(res.results)
         });
     });
 
