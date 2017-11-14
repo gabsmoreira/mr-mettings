@@ -1,4 +1,4 @@
-CREATE TABLE Group (
+CREATE TABLE Team (
     id INT(10) NOT NULL AUTO_INCREMENT,
     title VARCHAR(50) NOT NULL,
     id_user1 INT(10) NOT NULL,
