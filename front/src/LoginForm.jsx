@@ -5,6 +5,7 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import Slider from 'material-ui/Slider';
 import RaisedButton from 'material-ui/RaisedButton';
 import './css/materialize.css'
+import auth from './auth';
 
 import {amber500,amber700, blue500, grey300, grey400, grey200, grey600, grey800, grey900, grey500, grey50} from 'material-ui/styles/colors';
 
@@ -24,10 +25,31 @@ class LoginForm extends Component {
       textFields : {
         email : '',
         password : '',
-        userName : ''
+        name : ''
       }
     }
   }
+
+  loginRequest = () => {
+      auth.register(this.state.textFields.email, this.state.textFields.password, this.state.textFields.name,(result) => {
+        if (result.status == 401){
+          this.setState({ error : "Senha incorreta. Verifique sua senha e tente novamente"})
+        } else if (result.status == 404){
+          this.setState({ error : "Usuário não encontrado. Verifique se essa conta está registrada"})
+        } else if (result.status == 200){
+            console.log("USUÁRIO AUTENTICADO")
+        //   this.setState({ open : false, auth : auth.getUser()})
+        }
+      })
+  }
+
+  handleTextChange = (event) => {
+    let text = this.state.textFields
+    this.setState({ ...this.state, textFields: 
+      { ...this.state.textFields,[event.target.id] : event.target.value }}
+    )
+  }
+
 
   
 
@@ -65,17 +87,21 @@ class LoginForm extends Component {
                             style={formStyle}
                             floatingLabelText="Username"
                             hintText=""
+                            id = 'name'
                             underlineFocusStyle={{borderColor: amber700}}
-                            floatingLabelShrinkStyle={{color:amber700}}/>
+                            floatingLabelShrinkStyle={{color:amber700}}
+                            onChange={this.handleTextChange}/>
                         
                         
                         <TextField
                             style={formStyle}
                             floatingLabelText="Password"
                             hintText=""
+                            id='password'
                             type="password"
                             underlineFocusStyle={{borderColor: amber700}}
-                            floatingLabelShrinkStyle={{color:amber700}}/>
+                            floatingLabelShrinkStyle={{color:amber700}}
+                            onChange={this.handleTextChange}/>
                         <RaisedButton label="Login" style={styleButton} backgroundColor={amber500}/>
                         </div>
                     </Tab>
@@ -85,22 +111,29 @@ class LoginForm extends Component {
                             style={formStyle}
                             floatingLabelText="Email"
                             hintText=""
+                            id='email'
                             underlineFocusStyle={{borderColor: amber700}}
-                            floatingLabelShrinkStyle={{color:amber700}}/>
+                            floatingLabelShrinkStyle={{color:amber700}}
+                            onChange={this.handleTextChange}/>
+                            
                         <TextField
                             style={formStyle}
                             floatingLabelText="Username"
                             hintText=""
+                            id='name'
                             underlineFocusStyle={{borderColor: amber700}}
-                            floatingLabelShrinkStyle={{color:amber700}}/>
+                            floatingLabelShrinkStyle={{color:amber700}}
+                            onChange={this.handleTextChange}/>
                         <TextField
                             style={formStyle}
                             floatingLabelText="Password"
                             hintText=""
+                            id='password'
                             type="password"
                             underlineFocusStyle={{borderColor: amber700}}
-                            floatingLabelShrinkStyle={{color:amber700}}/>
-                        <RaisedButton label="Register" style={styleButton} backgroundColor={amber500}/>
+                            floatingLabelShrinkStyle={{color:amber700}}
+                            onChange={this.handleTextChange}/>
+                        <RaisedButton label="Register" style={styleButton} backgroundColor={amber500} onClick={this.loginRequest}/>
 
                         </div>
                     </Tab>
