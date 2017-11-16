@@ -34,12 +34,13 @@ app.get('/user', function (req, res) {
 
 // CRIA
 app.post('/register', function (req, res) {
+//    var data = JSON.parse(req.body);
+   console.log(req);
+
     var name = req.body.name;
     var email = req.body.email;
     var password = req.body.password;
-    console.log(req);
 
-    //console.log(name,email,password);
     connection.query("INSERT INTO User (name, email, password) values(?,?,?)",[name,email,password], function (error, results, fields) {
         if (error) throw error;   
             res.json(res.fields)

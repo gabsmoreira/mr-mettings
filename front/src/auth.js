@@ -23,16 +23,20 @@ export default window.auth = {
     register:(email1, password1, name1,callback) => {
         const baseUrl = 'http://localhost:3001';
         console.log('Logging in with',email1,password1)
+        var payload = {
+                        name: name1,
+                        email: email1,
+                        password:password1};
+
+var data = new FormData();
+data.append( "json", JSON.stringify( payload ) );
         fetch(baseUrl + '/register', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
               },
-            body : JSON.stringify({
-                    email : email1,
-                    password : password1,
-                    name: name1
-            })
+            body : data
         }).then((response) => {
             var data = response.json().then((data) => {
                 if (data.status == 200) {
