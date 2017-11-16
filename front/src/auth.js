@@ -1,49 +1,38 @@
 export default window.auth = {
-    login:(email,password,callback)=>{
-        const baseUrl ='http://localhost:3001/login';
-        console.log('Logging in with',email,password)
-        fetch(baseUrl + 'login', {
+    login:(name1, password1, callback)=>{
+        const baseUrl ='http://localhost:3001';
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        fetch(baseUrl + '/login', {
             method: 'POST',
+            headers,
             body : JSON.stringify({
-                    email : email,
-                    password : password
-            })
+                name: name1,
+                password:password1})
         }).then((response) => {
             var data = response.json().then((data) => {
-                if (data.status == 200) {
-                    console.log( '[Auth] Auth Successful',data)
-                } else {
-                    console.log('[Auth] Auth failed,error ' + data.status)
-                }
+                // console.log(data)
             callback(data)
             })
         })
     },
     
     register:(email1, password1, name1,callback) => {
-        const baseUrl = 'http://localhost:3001';
         console.log('Logging in with',email1,password1)
-        var payload = {
-                        name: name1,
-                        email: email1,
-                        password:password1};
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
 
-var data = new FormData();
-data.append( "json", JSON.stringify( payload ) );
-        fetch(baseUrl + '/register', {
+        fetch("http://localhost:3001/register", {
             method: 'POST',
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
-              },
-            body : data
+            headers,
+            body : JSON.stringify({
+                name: name1,
+                email: email1,
+                password:password1})
         }).then((response) => {
             var data = response.json().then((data) => {
-                if (data.status == 200) {
-                    console.log( '[Auth] Auth Successful',data)
-                } else {
-                    console.log('[Auth] Auth failed,error ' + data.status)
-                }
+                // console.log(data)
             callback(data)
             })
         })

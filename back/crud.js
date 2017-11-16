@@ -18,13 +18,13 @@ app.listen(3001, function () {
 var connection = mysql.createConnection({
     host : 'localhost',
     user : 'root',
-    password : '160520',
+    password : '1234',
     database : 'mrmeetings'
     })
 
 
 app.get('/user', function (req, res) {
-    connection.query('SELECT * FROM User', function (error,
+    connection.query('SELECT * FROM user', function (error,
     results, fields) {
     if (error) throw error;
     res.json(results)
@@ -41,10 +41,10 @@ app.post('/register', function (req, res) {
     var email = req.body.email;
     var password = req.body.password;
 
-    connection.query("INSERT INTO User (name, email, password) values(?,?,?)",[name,email,password], function (error, results, fields) {
+    connection.query("INSERT INTO user (name, email, password) values(?,?,?)",[name,email,password], function (error, results, fields) {
         if (error) throw error;   
-            res.json(res.fields)
-        });
+            res.json(req.body)
+        }); 
     });
 
 
@@ -56,7 +56,7 @@ app.post('/update', function (req, res){
     var email = req.body.email;
     var password = req.body.password;
     console.log(id, name, email, password)
-    connection.query('UPDATE User SET name=?,email=?,password=? WHERE user_id=?',[name,email,password,id],  function (error, results, fields) {
+    connection.query('UPDATE user SET name=?,email=?,password=? WHERE user_id=?',[name,email,password,id],  function (error, results, fields) {
         if (error) throw error;
         res.json(results)
     });
@@ -68,7 +68,7 @@ app.post('/update', function (req, res){
 app.post('/delete', function (req, res){
     var user_id = req.body.id
     console.log(user_id)
-    connection.query('DELETE FROM User WHERE user_id=?',[user_id],  function (error, results, fields) {
+    connection.query('DELETE FROM user WHERE user_id=?',[user_id],  function (error, results, fields) {
         if (error) throw error;
         res.json(results)
     });

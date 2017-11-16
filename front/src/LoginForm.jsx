@@ -32,14 +32,6 @@ class LoginForm extends Component {
 
   loginRequest = () => {
       auth.register(this.state.textFields.email, this.state.textFields.password, this.state.textFields.name,(result) => {
-        if (result.status == 401){
-          this.setState({ error : "Senha incorreta. Verifique sua senha e tente novamente"})
-        } else if (result.status == 404){
-          this.setState({ error : "Usuário não encontrado. Verifique se essa conta está registrada"})
-        } else if (result.status == 200){
-            console.log("USUÁRIO AUTENTICADO")
-        //   this.setState({ open : false, auth : auth.getUser()})
-        }
       })
   }
 
