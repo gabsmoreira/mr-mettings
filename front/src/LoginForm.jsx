@@ -30,10 +30,19 @@ class LoginForm extends Component {
     }
   }
 
-  loginRequest = () => {
+  registerRequest = () => {
       auth.register(this.state.textFields.email, this.state.textFields.password, this.state.textFields.name,(result) => {
+        this.setState({auth: result});
+        localStorage.setItem("user", result);
       })
   }
+
+  loginRequest = () => {
+    auth.login(this.state.textFields.name, this.state.textFields.password,(result) => {
+        this.setState({auth: result});
+        localStorage.setItem("user", result);
+    })
+}
 
   handleTextChange = (event) => {
     let text = this.state.textFields
@@ -94,7 +103,7 @@ class LoginForm extends Component {
                             underlineFocusStyle={{borderColor: amber700}}
                             floatingLabelShrinkStyle={{color:amber700}}
                             onChange={this.handleTextChange}/>
-                        <RaisedButton label="Login" style={styleButton} backgroundColor={amber500}/>
+                        <RaisedButton label="Login" style={styleButton} backgroundColor={amber500} onClick={this.loginRequest}/>
                         </div>
                     </Tab>
                     <Tab label="Register" style={{backgroundColor:this.state.colorRegisterTab}} >
@@ -125,7 +134,7 @@ class LoginForm extends Component {
                             underlineFocusStyle={{borderColor: amber700}}
                             floatingLabelShrinkStyle={{color:amber700}}
                             onChange={this.handleTextChange}/>
-                        <RaisedButton label="Register" style={styleButton} backgroundColor={amber500} onClick={this.loginRequest}/>
+                        <RaisedButton label="Register" style={styleButton} backgroundColor={amber500} onClick={this.registerRequest}/>
 
                         </div>
                     </Tab>
