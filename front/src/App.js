@@ -15,6 +15,13 @@ import Slider from 'material-ui/Slider';
 import RaisedButton from 'material-ui/RaisedButton';
 import './css/materialize.css'
 import auth from './auth';
+import IconButton from 'material-ui/IconButton';
+import AppBar from 'material-ui/AppBar';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import Toggle from 'material-ui/Toggle';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+
 
 import {amber500,amber700, blue500, grey300, grey400, grey200, grey600, grey800, grey900, grey500, grey50} from 'material-ui/styles/colors';
 
@@ -25,13 +32,11 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      auth : null,
+      auth : localStorage.getItem("user"),
       loading : false,
       error : '',
       login : true,
       image: './img/metting.jpg',
-      colorLoginTab: grey500,
-      colorRegisterTab:grey500,
       textFields : {
         email : '',
         password : '',
@@ -49,9 +54,9 @@ class App extends Component {
   registerRequest = () => {
     auth.register(this.state.textFields.email, this.state.textFields.password, this.state.textFields.name,(result) => {
       console.log(result.name);
-      this.setState({auth: result});
       localStorage.setItem("user", result.name);
       localStorage.setItem("email", result.email);
+      this.setState({auth: localStorage.getItem("user")});
       
     })
   }
@@ -59,9 +64,9 @@ class App extends Component {
   loginRequest = () => {
     auth.login(this.state.textFields.name, this.state.textFields.password, (result) => {
       console.log(result.name);
-      this.setState({auth: result});
       localStorage.setItem("user", result.name);
       localStorage.setItem("email", result.email);
+      this.setState({auth: localStorage.getItem("user")});
       
     })
   }
@@ -72,10 +77,31 @@ class App extends Component {
       { ...this.state.textFields,[event.target.id] : event.target.value }}
     )
   }
+  logoutRequest = () => {
+    localStorage.setItem("user", null);
+    this.setState({auth: null})
+  }
 
   
   
   render() {
+    const Logged = (props) => (
+      <IconMenu
+        iconButtonElement={
+          <IconButton><MoreVertIcon /></IconButton>
+        }
+        targetOrigin={{horizontal: 'right', vertical: 'top'}}
+        anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+      >
+        <MenuItem primaryText="Sign out"  onClick={this.logoutRequest}/>
+      </IconMenu>
+    );
+
+    const styles = {
+        title: {
+            cursor: 'pointer',
+        },
+    };
     const style = {
       backgroundColor: grey50,
       textAlign: 'center',
@@ -100,13 +126,20 @@ class App extends Component {
     return (
       <div className="App">
         <MuiThemeProvider>
-          <Tabber />
+        <div className="Tabber">
+          <AppBar
+            style={{backgroundColor: amber500}}
+            title={<span style={styles.title}>Mr. Meetings</span>}
+            onTitleTouchTap={null}
+            iconElementRight={this.state.auth ? <Logged /> : null}
+          />
+        </div>
         <div className="LoginForm row">
                 <div className="col s12 m2 l2"></div>
                 <div className="col s12 m8 l8">
                 <Paper style={style} zDepth={2}>
                 <Tabs inkBarStyle={{background:amber700}}>
-                    <Tab label="Login" style={{backgroundColor: this.state.colorLoginTab}} >
+                    <Tab label="Login" style={{backgroundColor: grey500}} >
                         <div>
                         <TextField
                             style={formStyle}
@@ -130,7 +163,7 @@ class App extends Component {
                         <RaisedButton label="Login" style={styleButton} backgroundColor={amber500} onClick={this.loginRequest}/>
                         </div>
                     </Tab>
-                    <Tab label="Register" style={{backgroundColor:this.state.colorRegisterTab}} >
+                    <Tab label="Register" style={{backgroundColor: grey500}} >
                         <div>
                         <TextField
                             style={formStyle}
@@ -177,7 +210,14 @@ class App extends Component {
     return (
       <div className="App">
         <MuiThemeProvider>
-          <Tabber user={this.state.auth} />
+          <div className="Tabber">
+            <AppBar
+              style={{backgroundColor: amber500}}
+              title={<span style={styles.title}>Mr. Meetings</span>}
+              onTitleTouchTap={null}
+              iconElementRight={this.state.auth ? <Logged /> : null}
+            />
+          </div>
           <Calendar />
         </MuiThemeProvider>
 
