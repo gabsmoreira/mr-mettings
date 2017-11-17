@@ -57,12 +57,10 @@ class App extends Component {
   }
 
   loginRequest = () => {
-    auth.register(this.state.textFields.password, this.state.textFields.name,(result) => {
+    auth.login(this.state.textFields.name,this.state.textFields.password,(result) => {
       console.log(result.name);
       this.setState({auth: result});
-      localStorage.setItem("user", result.name);
-      localStorage.setItem("email", result.email);
-      
+      localStorage.setItem("user", result.name);      
     })
   }
 
@@ -127,7 +125,7 @@ class App extends Component {
                             underlineFocusStyle={{borderColor: amber700}}
                             floatingLabelShrinkStyle={{color:amber700}}
                             onChange={this.handleTextChange}/>
-                        <RaisedButton label="Login" style={styleButton} backgroundColor={amber500}/>
+                        <RaisedButton label="Login" style={styleButton} backgroundColor={amber500} onClick={this.loginRequest}/>
                         </div>
                     </Tab>
                     <Tab label="Register" style={{backgroundColor:this.state.colorRegisterTab}} >
