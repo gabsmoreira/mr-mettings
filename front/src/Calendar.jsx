@@ -202,6 +202,7 @@ class Calendar extends Component {
             <div className="Calendar">
                 <br/>
                 <RaisedButton label="Criar evento" onClick={this.handleOpen} backgroundColor={amber400} />
+                
                 <Dialog
                 title="Escolha o horário"
                 actions={actions}
@@ -313,6 +314,8 @@ class Calendar extends Component {
             autoHideDuration={4000}
             onRequestClose={this.handleRequestClose}
             />
+            <br />
+            
         </div>    
                 
         );

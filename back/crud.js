@@ -18,7 +18,7 @@ app.listen(3001, function () {
 var connection = mysql.createConnection({
     host : 'localhost',
     user : 'root',
-    password : '1234',
+    password : '160520',
     database : 'mrmeetings'
     })
 
@@ -99,4 +99,43 @@ app.post('/delete', function (req, res){
     });
 });
 
+////////////////////////////////////////////////////////////////////
+
+//Update Schedule
+app.post('/updateSchedule', function (req, res){
+    var start = req.body.start;
+    var end = req.body.end;
+    var day = req.body.day;
+
+    console.log(day, start, end)
+
+    switch(day){
+        case "Monday":
+            for (i = start; i < end; i++){
+                connection.query('UPDATE Schedule SET name=?,email=?,password=? WHERE user_id=?',[name,email,password,id],  function (error, results, fields) {
+                    if (error) throw error;
+                    res.json(results)
+                });
+            }
+            break;
+        case "Tuesday":
+            break;
+        case "Wednesday":
+            break;
+        case "Thursday":
+            break;
+        case "Friday":
+            break;
+        case "Saturday":
+            break;
+        case "Sunday":
+            break;
+
+    }
+
+    
+    
+
+    
+});
 
