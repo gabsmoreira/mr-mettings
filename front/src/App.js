@@ -62,12 +62,17 @@ class App extends Component {
   }
 
   loginRequest = () => {
-    auth.login(this.state.textFields.name, this.state.textFields.password, (result) => {
+    auth.login(this.state.textFields.name,this.state.textFields.password,(result) => {
       console.log(result.name);
+<<<<<<< HEAD
       localStorage.setItem("user", result.name);
       localStorage.setItem("email", result.email);
       this.setState({auth: localStorage.getItem("user")});
       
+=======
+      this.setState({auth: result});
+      localStorage.setItem("user", result.name);      
+>>>>>>> fa0fd36a7a6cbb30d211d1464c04359c7ea79070
     })
   }
 
