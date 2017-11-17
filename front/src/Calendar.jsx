@@ -174,8 +174,7 @@ class Calendar extends Component {
     
 
     render() {
-        const hours = ['00:00','01:00','02:00','03:00','04:00',
-                        '05:00','06:00','07:00','08:00','09:00',
+        const hours = ['06:00','07:00','08:00','09:00',
                         '10:00','11:00','12:00','13:00','14:00',
                         '15:00','16:00','17:00','18:00','19:00',
                         '20:00','21:00','22:00','23:00']
@@ -218,13 +217,13 @@ class Calendar extends Component {
 
                 <DropDownMenu value={this.state.valueStart} onChange={this.handleChangeStart}>
                 {hours.map( (row,index) => (
-                    <MenuItem value={index} primaryText={row} />
+                    <MenuItem value={index+6} primaryText={row} />
                     ))}
                 </DropDownMenu>
                     
                 <DropDownMenu value={this.state.valueStop} onChange={this.handleChangeStop}>
                 {hours.map( (row,index) => (
-                    <MenuItem value={index} primaryText={row} />
+                    <MenuItem value={index+6} primaryText={row} />
                     ))}
                 </DropDownMenu>
 
