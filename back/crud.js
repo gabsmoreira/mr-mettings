@@ -124,7 +124,7 @@ app.post('/updateSchedule', function (req, res){
     switch(day){
         case "Monday":
             for (i = start; i < end; i++){
-                connection.query('UPDATE Schedule SET ?=? WHERE user_id=?',[days[0][i], FALSE, id],  function (error, results, fields) {
+                connection.query('UPDATE Schedule SET ?=? WHERE user_id=?',[days[0][i-6], FALSE, id],  function (error, results, fields) {
                     if (error) throw error;
                     res.json(results)
                 });
@@ -132,7 +132,7 @@ app.post('/updateSchedule', function (req, res){
             break;
         case "Tuesday":
             for (i = start; i < end; i++){
-                connection.query('UPDATE Schedule SET ?=? WHERE user_id=?',[days[1][i], FALSE, id],  function (error, results, fields) {
+                connection.query('UPDATE Schedule SET ?=? WHERE user_id=?',[days[1][i-6], FALSE, id],  function (error, results, fields) {
                     if (error) throw error;
                     res.json(results)
                 });
@@ -140,7 +140,7 @@ app.post('/updateSchedule', function (req, res){
             break;
         case "Wednesday":
             for (i = start; i < end; i++){
-                connection.query('UPDATE Schedule SET ?=? WHERE user_id=?',[days[2][i], FALSE, id],  function (error, results, fields) {
+                connection.query('UPDATE Schedule SET ?=? WHERE user_id=?',[days[2][i-6], FALSE, id],  function (error, results, fields) {
                     if (error) throw error;
                     res.json(results)
                 });
@@ -148,7 +148,7 @@ app.post('/updateSchedule', function (req, res){
             break;
         case "Thursday":
             for (i = start; i < end; i++){
-                connection.query('UPDATE Schedule SET ?=? WHERE user_id=?',[days[3][i], FALSE, id],  function (error, results, fields) {
+                connection.query('UPDATE Schedule SET ?=? WHERE user_id=?',[days[3][i-6], FALSE, id],  function (error, results, fields) {
                     if (error) throw error;
                     res.json(results)
                 });
@@ -156,7 +156,7 @@ app.post('/updateSchedule', function (req, res){
             break;
         case "Friday":
             for (i = start; i < end; i++){
-                connection.query('UPDATE Schedule SET ?=? WHERE user_id=?',[days[4][i], FALSE, id],  function (error, results, fields) {
+                connection.query('UPDATE Schedule SET ?=? WHERE user_id=?',[days[4][i-6], FALSE, id],  function (error, results, fields) {
                     if (error) throw error;
                     res.json(results)
                 });
@@ -164,7 +164,7 @@ app.post('/updateSchedule', function (req, res){
             break;
         case "Saturday":
             for (i = start; i < end; i++){
-                connection.query('UPDATE Schedule SET ?=? WHERE user_id=?',[days[5][i], FALSE, id],  function (error, results, fields) {
+                connection.query('UPDATE Schedule SET ?=? WHERE user_id=?',[days[5][i-6], FALSE, id],  function (error, results, fields) {
                     if (error) throw error;
                     res.json(results)
                 });
@@ -172,7 +172,7 @@ app.post('/updateSchedule', function (req, res){
             break;
         case "Sunday":
             for (i = start; i < end; i++){
-                connection.query('UPDATE Schedule SET ?=? WHERE user_id=?',[days[6][i], FALSE, id],  function (error, results, fields) {
+                connection.query('UPDATE Schedule SET ?=? WHERE user_id=?',[days[6][i-6], FALSE, id],  function (error, results, fields) {
                     if (error) throw error;
                     res.json(results)
                 });
