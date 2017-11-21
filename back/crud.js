@@ -152,7 +152,7 @@ app.post('/updateSchedule', function (req, res){
     switch(day){
         case 0:
             for (i = start; i < end; i++){
-                console.log(days[0][i-6]);
+                //console.log(days[0][i-6]);
                 qry = "UPDATE Schedule SET "+days[0][i-6]+"=? WHERE id_user=?";
                 connection.query(qry,[0, id],  function (error, results, fields) {
                     if (error) throw error;
@@ -217,10 +217,16 @@ app.post('/updateSchedule', function (req, res){
         default:
             break;
     }
-
-    
-    
-
     
 });
 
+// acha os horarios pro front
+
+// app.post('/findSchedule', function (req, res){
+//     var id = req.body.id;
+//     events = [[],[],[],[],[],[]]
+
+//     for(int i=0; )
+
+
+// });
