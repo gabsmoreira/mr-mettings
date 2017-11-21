@@ -32,16 +32,16 @@ class Calendar extends Component {
     constructor(props){
     super(props);
     this.state = {
-      error : '',
-      editing : false,
-      events : {monday:[],tuesday:[],wednesday:[],
+        error : '',
+        editing : false,
+        events : {monday:[],tuesday:[],wednesday:[],
                 thursday:[],friday:[], saturday:[],
                 sunday:[]},
-      open: false,
-      openSnackbar: false,
-      valueStart: 0,
-      valueStop: 0,
-      valueDay: 0
+        open: false,
+        openSnackbar: false,
+        valueStart: 0,
+        valueStop: 0,
+        valueDay: 0
     }
   }
 
@@ -62,44 +62,44 @@ class Calendar extends Component {
             this.setState({open: false});
             if (this.state.valueDay == 0){
                 this.state.events.monday.push({
-                    startTime: String(this.state.valueStart) + ':00',
-                    stopTime: String(this.state.valueStop) + ':00'
+                    startTime: this.state.valueStart,
+                    stopTime: this.state.valueStop
                 })
             }
             else if (this.state.valueDay == 1){
                 this.state.events.tuesday.push({
-                    startTime: String(this.state.valueStart) + ':00',
-                    stopTime: String(this.state.valueStop) + ':00'
+                    startTime: this.state.valueStart,
+                    stopTime: this.state.valueStop
                 })
             }
             else if (this.state.valueDay == 2){
                 this.state.events.wednesday.push({
-                    startTime: String(this.state.valueStart) + ':00',
-                    stopTime: String(this.state.valueStop) + ':00'
+                    startTime: this.state.valueStart,
+                    stopTime: this.state.valueStop
                 })
             }
             else if (this.state.valueDay == 3){
                 this.state.events.thursday.push({
-                    startTime: String(this.state.valueStart) + ':00',
-                    stopTime: String(this.state.valueStop) + ':00'
+                    startTime: this.state.valueStart,
+                    stopTime: this.state.valueStop
                 })
             }
             else if (this.state.valueDay == 4){
                 this.state.events.friday.push({
-                    startTime: String(this.state.valueStart) + ':00',
-                    stopTime: String(this.state.valueStop) + ':00'
+                    startTime: this.state.valueStart,
+                    stopTime: this.state.valueStop
                 })
             }
             else if (this.state.valueDay == 5){
                 this.state.events.saturday.push({
-                    startTime: String(this.state.valueStart) + ':00',
-                    stopTime: String(this.state.valueStop) + ':00'
+                    startTime: this.state.valueStart,
+                    stopTime: this.state.valueStop
                 })
             }
             else if (this.state.valueDay == 6){
                 this.state.events.sunday.push({
-                    startTime: String(this.state.valueStart) + ':00',
-                    stopTime: String(this.state.valueStop) + ':00'
+                    startTime: this.state.valueStart,
+                    stopTime: this.state.valueStop
                 })
             }
         }
@@ -110,55 +110,61 @@ class Calendar extends Component {
     existEvent=(valueStart, valueStop, valueDay) =>{
         if (this.state.valueDay == 0){
             for(var i = 0; i<this.state.events.monday.length; i++){
-                if(this.state.events.monday[i].startTime === String(valueStart)+ ':00'){
+                if(this.state.events.monday[i].startTime === valueStart){
                     return true;
                 }
             }
         }
         else if (this.state.valueDay == 1){
             for(var i = 0; i<this.state.events.tuesday.length; i++){
-                if(this.state.events.tuesday[i].startTime === String(valueStart)+ ':00'){
+                if(this.state.events.tuesday[i].startTime === valueStart){
                     return true;
                 }
             }
         }
         else if (this.state.valueDay == 2){
             for(var i = 0; i<this.state.events.wednesday.length; i++){
-                if(this.state.events.wednesday[i].startTime === String(valueStart)+ ':00'){
+                if(this.state.events.wednesday[i].startTime === valueStart){
                     return true;
                 }
             }
         }
         else if (this.state.valueDay == 3){
             for(var i = 0; i<this.state.events.thursday.length; i++){
-                if(this.state.events.thursday[i].startTime === String(valueStart)+ ':00'){
+                if(this.state.events.thursday[i].startTime === valueStart){
                     return true;
                 }
             }
         }
         else if (this.state.valueDay == 4){
             for(var i = 0; i<this.state.events.friday.length; i++){
-                if(this.state.events.friday[i].startTime === String(valueStart)+ ':00'){
+                if(this.state.events.friday[i].startTime === valueStart){
                     return true;
                 }
             }
         }
         else if (this.state.valueDay == 5){
             for(var i = 0; i<this.state.events.saturday.length; i++){
-                if(this.state.events.saturday[i].startTime === String(valueStart)+ ':00'){
+                if(this.state.events.saturday[i].startTime === valueStart){
                     return true;
                 }
             }
         }
         else if (this.state.valueDay == 6){
             for(var i = 0; i<this.state.events.sunday.length; i++){
-                if(this.state.events.sunday[i].startTime === String(valueStart)+ ':00'){
+                if(this.state.events.sunday[i].startTime === valueStart){
                     return true;
                 }
             }
         }
         return false
 
+    }
+
+    orderEvents = () => {
+        for(var i; i<this.state.events.monday.length; i++){
+
+        }
     }
 
     handleChangeStart = (event, index, valueStart) => {
@@ -201,7 +207,6 @@ class Calendar extends Component {
             <div className="Calendar">
                 <br/>
                 <RaisedButton label="Criar evento" onClick={this.handleOpen} backgroundColor={amber400} />
-                
                 <Dialog
                 title="Escolha o horário"
                 actions={actions}
@@ -257,49 +262,49 @@ class Calendar extends Component {
                         <TableRowColumn style={tableRowStyle}>
                             <div>
                             {this.state.events.monday.map( (row,index) => (
-                                <Event startTime={row.startTime} stopTime={row.stopTime} />
+                                <Event startTime={String(row.startTime) + ':00' } stopTime={String(row.stopTime) + ':00'} />
                                 ))}
                             </div>
                         </TableRowColumn>
                         <TableRowColumn style={tableRowStyle}>
                             <div>
                             {this.state.events.tuesday.map( (row,index) => (
-                                <Event startTime={row.startTime} stopTime={row.stopTime} />
+                                <Event startTime={String(row.startTime) + ':00' } stopTime={String(row.stopTime) + ':00'} />
                                 ))}
                             </div>
                         </TableRowColumn>
                         <TableRowColumn style={tableRowStyle}>
                             <div>
                             {this.state.events.wednesday.map( (row,index) => (
-                                <Event startTime={row.startTime} stopTime={row.stopTime} />
+                                <Event startTime={String(row.startTime) + ':00' } stopTime={String(row.stopTime) + ':00'} />
                                 ))}
                             </div>
                         </TableRowColumn>
                         <TableRowColumn style={tableRowStyle}>
                             <div>
                             {this.state.events.thursday.map( (row,index) => (
-                                <Event startTime={row.startTime} stopTime={row.stopTime} />
+                                <Event startTime={String(row.startTime) + ':00' } stopTime={String(row.stopTime) + ':00'} />
                                 ))}
                             </div>
                         </TableRowColumn>
                         <TableRowColumn style={tableRowStyle}>
                             <div>
                             {this.state.events.friday.map( (row,index) => (
-                                <Event startTime={row.startTime} stopTime={row.stopTime} />
+                                <Event startTime={String(row.startTime) + ':00' } stopTime={String(row.stopTime) + ':00'} />
                                 ))}
                             </div>
                         </TableRowColumn>
                         <TableRowColumn style={tableRowStyle}>
                             <div>
                             {this.state.events.saturday.map( (row,index) => (
-                                <Event startTime={row.startTime} stopTime={row.stopTime} />
+                                <Event startTime={String(row.startTime) + ':00' } stopTime={String(row.stopTime) + ':00'} />
                                 ))}
                             </div>
                         </TableRowColumn>
                         <TableRowColumn style={tableRowStyle}>
                             <div>
                             {this.state.events.sunday.map( (row,index) => (
-                                <Event startTime={row.startTime} stopTime={row.stopTime} />
+                                <Event startTime={String(row.startTime) + ':00' } stopTime={String(row.stopTime) + ':00'} />
                                 ))}
                             </div>
                         </TableRowColumn>
@@ -313,8 +318,6 @@ class Calendar extends Component {
             autoHideDuration={4000}
             onRequestClose={this.handleRequestClose}
             />
-            <br />
-            
         </div>    
                 
         );
