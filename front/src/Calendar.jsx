@@ -46,6 +46,14 @@ class Calendar extends Component {
     }
   }
 
+    componentWillMount(){
+        store.getEvents((results)=>{
+            console.log(results);
+        });
+
+    }
+
+
     handleOpen = () => {
         this.setState({open: true});
     };

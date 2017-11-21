@@ -138,7 +138,7 @@ app.post('/updateSchedule', function (req, res){
     var day = req.body.day;
     var id = req.body.id;
 
-    console.log(day, start, end)
+    //console.log(day, start, end)
 
     days = [["monday_6","monday_7","monday_8","monday_9","monday_10","monday_11"," monday_12","monday_13","monday_14","monday_15","monday_16","monday_17","monday_18"," monday_19","monday_20","monday_21","monday_22","monday_23"],
     ["tuesday_6","tuesday_7","tuesday_8","tuesday_9","tuesday_10","tuesday_11"," tuesday_12","tuesday_13","tuesday_14","tuesday_15","tuesday_16","tuesday_17","tuesday_18"," tuesday_19","tuesday_20","tuesday_21","tuesday_22","tuesday_23"],
@@ -222,11 +222,19 @@ app.post('/updateSchedule', function (req, res){
 
 // acha os horarios pro front
 
-// app.post('/findSchedule', function (req, res){
-//     var id = req.body.id;
-//     events = [[],[],[],[],[],[]]
+app.post('/findSchedule', function (req, res){
+    var id = req.body.id;
+    events = [[],[],[],[],[],[]]
 
-//     for(int i=0; )
+    connection.query("SELECT * FROM Schedule WHERE  id_user=?",[id],  function (error, results, fields) {
+        if (error) throw error;
+        var data = JSON.stringify(results);
+        var json = JSON.parse(data);
+        console.log("VSF SEU SCRIPT BOSTA DO CARALHO")
+        console.log(json);
+        var days = json[0];
+        res.json(days);
 
+    });
 
-// });
+});
