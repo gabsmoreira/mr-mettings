@@ -40,13 +40,33 @@ app.post('/register', function (req, res) {
     var name = req.body.name;
     var email = req.body.email;
     var password = req.body.password;
+    var id_user;
 
     connection.query("INSERT INTO User (name, email, password) values(?,?,?)",[name,email,password], function (error, results, fields) {
         if (error) throw error;   
             res.json(req.body)
-        }); 
-    });
+    }); 
+    
 
+    connection.query("SELECT id FROM User WHERE name=?",[name], function (error, results, fields) {
+        if (error) throw error;   
+            //res.json(req.body)
+            //console.log(results)
+            var data = JSON.stringify(results);
+            var json = JSON.parse(data);
+            id_user = json[0]['id'];
+            //console.log(number);
+            connection.query("INSERT INTO Schedule (id_user) values(?)",[id_user], function (error, results, fields) {
+                if (error) throw error;   
+                    // res.json(req.body)
+            }); 
+    }); 
+
+
+
+    
+
+});
     
 
 // LOGIN
@@ -60,7 +80,7 @@ app.post('/login', function (req, res) {
 
     connection.query("SELECT COUNT(*) FROM User WHERE name=? AND password=? LIMIT 1",[name,password], function (error, results, fields) {
         var data = JSON.stringify(results);
-        var json = JSON.parse(data)
+        var json = JSON.parse(data);
         var number = json[0]['COUNT(*)'];
         if (error) throw error;
         if (number != 0){

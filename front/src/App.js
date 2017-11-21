@@ -67,10 +67,6 @@ class App extends Component {
       localStorage.setItem("user", result.name);
       localStorage.setItem("email", result.email);
       this.setState({auth: localStorage.getItem("user")});
-<<<<<<< HEAD
-=======
-      
->>>>>>> 1dffc2a1f0b0ea4986a3b99f84c27f65baf93e0d
       this.setState({auth: result});
       localStorage.setItem("user", result.name);      
     })
