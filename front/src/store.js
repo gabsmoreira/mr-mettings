@@ -1,15 +1,18 @@
 export default window.auth = {
-    createEvent:(start, stop, day, callback)=>{
+    createEvent:(day1, start1, stop1, callback)=>{
         const baseUrl ='http://localhost:3001';
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        fetch(baseUrl + '/login', {
+        fetch(baseUrl + '/updateSchedule', {
             method: 'POST',
             headers,
             body : JSON.stringify({
-                name: name1,
-                password:password1})
+                day: day1,
+                start: start1,
+                end: stop1,
+                id: localStorage.getItem('id')
+            })
         }).then((response) => {
             var data = response.json().then((data) => {
                 // console.log(data)

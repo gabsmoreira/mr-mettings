@@ -32,7 +32,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      auth : localStorage.getItem("user"),
+      auth : localStorage.getItem("id"),
       loading : false,
       error : '',
       login : true,
@@ -54,9 +54,8 @@ class App extends Component {
   registerRequest = () => {
     auth.register(this.state.textFields.email, this.state.textFields.password, this.state.textFields.name,(result) => {
       console.log(result.name);
-      localStorage.setItem("user", result.name);
-      localStorage.setItem("email", result.email);
-      this.setState({auth: localStorage.getItem("user")});
+      localStorage.setItem("id", result);
+      this.setState({auth: localStorage.getItem("id")});
       
     })
   }
@@ -64,11 +63,8 @@ class App extends Component {
   loginRequest = () => {
     auth.login(this.state.textFields.name,this.state.textFields.password,(result) => {
       console.log(result.name);
-      localStorage.setItem("user", result.name);
-      localStorage.setItem("email", result.email);
-      this.setState({auth: localStorage.getItem("user")});
-      this.setState({auth: result});
-      localStorage.setItem("user", result.name);      
+      localStorage.setItem("id", result);
+      this.setState({auth: localStorage.getItem("id")});
     })
   }
 
@@ -79,7 +75,7 @@ class App extends Component {
     )
   }
   logoutRequest = () => {
-    localStorage.setItem("user", null);
+    localStorage.setItem("id", null);
     this.setState({auth: null})
   }
 

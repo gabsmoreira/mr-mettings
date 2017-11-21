@@ -12,6 +12,7 @@ import Dialog from 'material-ui/Dialog';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem'; 
 import Snackbar from 'material-ui/Snackbar';
+import store from './store';
 
 
 import {
@@ -54,12 +55,13 @@ class Calendar extends Component {
     };
 
     createEvent = () => {
-        console.log(this.existEvent(this.state.valueStart,this.state.valueStop,this.state.valueStart, this.state.valueDay));
         if (this.state.valueStart >= this.state.valueStop || this.existEvent(this.state.valueStart,this.state.valueStop,this.state.valueStart, this.state.valueDay)){
             this.setState({openSnackbar: true});
         }
         else{
+
             this.setState({open: false});
+            store.createEvent(this.state.valueDay, this.state.valueStart, this.state.valueStop,(result)=>{});
             if (this.state.valueDay == 0){
                 this.state.events.monday.push({
                     startTime: this.state.valueStart,
