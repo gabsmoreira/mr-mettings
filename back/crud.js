@@ -18,7 +18,7 @@ app.listen(3001, function () {
 var connection = mysql.createConnection({
     host : 'localhost',
     user : 'root',
-    password : '160520',
+    password : '1234',
     database : 'mrmeetings'
     })
 
@@ -44,7 +44,7 @@ app.post('/register', function (req, res) {
 
     connection.query("INSERT INTO User (name, email, password) values(?,?,?)",[name,email,password], function (error, results, fields) {
         if (error) throw error;   
-            res.json(req.body)
+            
     }); 
     
 
@@ -56,9 +56,9 @@ app.post('/register', function (req, res) {
             var json = JSON.parse(data);
             id_user = json[0]['id'];
             //console.log(number);
+            res.json(id_user)
             connection.query("INSERT INTO Schedule (id_user) values(?)",[id_user], function (error, results, fields) {
                 if (error) throw error;   
-                    // res.json(req.body)
             }); 
     }); 
 
@@ -84,7 +84,15 @@ app.post('/login', function (req, res) {
         var number = json[0]['COUNT(*)'];
         if (error) throw error;
         if (number != 0){
-            res.json(req.body);
+            
+            connection.query("SELECT id FROM User WHERE name=?",[name], function (error, results, fields) {
+                if (error) throw error;   
+                var data = JSON.stringify(results);
+                var json = JSON.parse(data);
+                id_user = json[0]['id'];
+                res.json(id_user);
+                // localStorage.setItem('id', id_user)
+            });
 
         }   
 
@@ -142,57 +150,57 @@ app.post('/updateSchedule', function (req, res){
     ]
 
     switch(day){
-        case "Monday":
+        case 0:
             for (i = start; i < end; i++){
-                connection.query('UPDATE Schedule SET ?=? WHERE user_id=?',[days[0][i-6], FALSE, id],  function (error, results, fields) {
+                connection.query('UPDATE Schedule SET ?=? WHERE id_user=?',[days[0][i-6], 0, id],  function (error, results, fields) {
                     if (error) throw error;
                     res.json(results)
                 });
             }
             break;
-        case "Tuesday":
+        case 1:
             for (i = start; i < end; i++){
-                connection.query('UPDATE Schedule SET ?=? WHERE user_id=?',[days[1][i-6], FALSE, id],  function (error, results, fields) {
+                connection.query('UPDATE Schedule SET ?=? WHERE id_user=?',[days[1][i-6], 0, id],  function (error, results, fields) {
                     if (error) throw error;
                     res.json(results)
                 });
             }
             break;
-        case "Wednesday":
+        case 2:
             for (i = start; i < end; i++){
-                connection.query('UPDATE Schedule SET ?=? WHERE user_id=?',[days[2][i-6], FALSE, id],  function (error, results, fields) {
+                connection.query('UPDATE Schedule SET ?=? WHERE id_user=?',[days[2][i-6], 0, id],  function (error, results, fields) {
                     if (error) throw error;
                     res.json(results)
                 });
             }
             break;
-        case "Thursday":
+        case 3:
             for (i = start; i < end; i++){
-                connection.query('UPDATE Schedule SET ?=? WHERE user_id=?',[days[3][i-6], FALSE, id],  function (error, results, fields) {
+                connection.query('UPDATE Schedule SET ?=? WHERE id_user=?',[days[3][i-6], 0, id],  function (error, results, fields) {
                     if (error) throw error;
                     res.json(results)
                 });
             }
             break;
-        case "Friday":
+        case 4:
             for (i = start; i < end; i++){
-                connection.query('UPDATE Schedule SET ?=? WHERE user_id=?',[days[4][i-6], FALSE, id],  function (error, results, fields) {
+                connection.query('UPDATE Schedule SET ?=? WHERE id_user=?',[days[4][i-6], 0, id],  function (error, results, fields) {
                     if (error) throw error;
                     res.json(results)
                 });
             }
             break;
-        case "Saturday":
+        case 5:
             for (i = start; i < end; i++){
-                connection.query('UPDATE Schedule SET ?=? WHERE user_id=?',[days[5][i-6], FALSE, id],  function (error, results, fields) {
+                connection.query('UPDATE Schedule SET ?=? WHERE id_user=?',[days[5][i-6], 0, id],  function (error, results, fields) {
                     if (error) throw error;
                     res.json(results)
                 });
             }
             break;
-        case "Sunday":
+        case 6:
             for (i = start; i < end; i++){
-                connection.query('UPDATE Schedule SET ?=? WHERE user_id=?',[days[6][i-6], FALSE, id],  function (error, results, fields) {
+                connection.query('UPDATE Schedule SET ?=? WHERE id_user=?',[days[6][i-6], 0, id],  function (error, results, fields) {
                     if (error) throw error;
                     res.json(results)
                 });
