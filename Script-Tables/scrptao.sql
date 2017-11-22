@@ -1,3 +1,8 @@
+CREATE DATABASE mrmeetings;
+
+USE mrmeetings;
+
+
 CREATE TABLE User (
     id INT(10) NOT NULL AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
