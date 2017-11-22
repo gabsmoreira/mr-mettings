@@ -21,6 +21,7 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import Toggle from 'material-ui/Toggle';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import GroupForm from './GroupForm'
 
 
 import {amber500,amber700, blue500, grey300, grey400, grey200, grey600, grey800, grey900, grey500, grey50} from 'material-ui/styles/colors';
@@ -36,6 +37,7 @@ class App extends Component {
       loading : false,
       error : '',
       login : true,
+      action: 'default',
       image: './img/metting.jpg',
       textFields : {
         email : '',
@@ -79,6 +81,15 @@ class App extends Component {
     this.setState({auth: null})
   }
 
+  handleActionChange = () => {
+    if(this.state.action == 'group'){
+      this.setState({action: 'default'})
+    }
+    else{
+      this.setState({action: 'group'})
+    }
+  }
+
   
   
   render() {
@@ -90,6 +101,8 @@ class App extends Component {
         targetOrigin={{horizontal: 'right', vertical: 'top'}}
         anchorOrigin={{horizontal: 'right', vertical: 'top'}}
       >
+        <MenuItem primaryText="Create meeting"  onClick={this.handleActionChange}/>
+        <MenuItem primaryText="Calendar"  onClick={this.handleActionChange}/>
         <MenuItem primaryText="Sign out"  onClick={this.logoutRequest}/>
       </IconMenu>
     );
@@ -204,22 +217,47 @@ class App extends Component {
     );
   }
   else{
-    return (
-      <div className="App">
-        <MuiThemeProvider>
-          <div className="Tabber">
-            <AppBar
-              style={{backgroundColor: amber500}}
-              title={<span style={styles.title}>Mr. Meetings</span>}
-              onTitleTouchTap={null}
-              iconElementRight={this.state.auth ? <Logged /> : null}
-            />
-          </div>
-          <Calendar />
-        </MuiThemeProvider>
+    if (this.state.action == 'default') {
+      return (
+        <div className="App">
+          <MuiThemeProvider>
+            <div className="Tabber">
+              <AppBar
+                style={{backgroundColor: amber500}}
+                title={<span style={styles.title}>Mr. Meetings</span>}
+                onTitleTouchTap={null}
+                iconElementRight={this.state.auth ? <Logged /> : null}
+              />
+            </div>
+            <div className="row">
+              <Calendar />
+            </div>
+            
+          </MuiThemeProvider>
+  
+        </div>
+      );
+    }
 
-      </div>
-    );
+    else if(this.state.action == 'group'){
+      return (
+        <div className="App">
+          <MuiThemeProvider>
+            <div className="Tabber">
+              <AppBar
+                style={{backgroundColor: amber500}}
+                title={<span style={styles.title}>Mr. Meetings</span>}
+                onTitleTouchTap={null}
+                iconElementRight={this.state.auth ? <Logged /> : null}
+              />
+            </div>
+            <GroupForm />
+          </MuiThemeProvider>
+  
+        </div>
+      );
+    }
+    
   }
   
     
