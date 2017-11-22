@@ -86,6 +86,26 @@ class GroupForm extends Component {
         }
     };
 
+    renderFormMembers(num) {
+        let FormMembers = [];
+        for(let i= 0; i < num; i++) {
+          stars.push(
+              <div>
+                  <TextField
+                    ref = {'member1'}
+                    hintText="Membro 1"
+                    underlineFocusStyle={styles.underlineStyle}
+                /><br />
+              </div>
+            
+          );
+        }
+        return (
+          <div>{stars}</div>
+        );
+      };
+      
+
     form(stepIndex){
         switch (stepIndex) {
             case 0:

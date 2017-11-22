@@ -1,4 +1,4 @@
-export default window.auth = {
+export default window.groupRegister = {
     registerGroup:(title1, member11, member21,callback) => {
         console.log('Creating group',title1)
         const headers = new Headers();
