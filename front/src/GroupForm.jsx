@@ -75,7 +75,7 @@ class GroupForm extends Component {
                     Click here
                 </a> to reset the example.
                 </p>
-            ) : (
+            ) : ( 
                 <div>
                 <p>{this.getStepContent(stepIndex)}</p>
                 <div style={{marginTop: 12}}>

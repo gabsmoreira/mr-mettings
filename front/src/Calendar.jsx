@@ -328,6 +328,7 @@ class Calendar extends Component {
                 </Dialog>
 
                 <Table
+                className="row container"
                 height={this.state.height}
                 fixedHeader={false}
                 fixedFooter={false}

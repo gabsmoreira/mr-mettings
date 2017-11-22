@@ -229,7 +229,10 @@ class App extends Component {
                 iconElementRight={this.state.auth ? <Logged /> : null}
               />
             </div>
-            <Calendar />
+            <div className="row">
+              <Calendar />
+            </div>
+            
           </MuiThemeProvider>
   
         </div>
