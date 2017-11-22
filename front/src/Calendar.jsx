@@ -152,7 +152,7 @@ class Calendar extends Component {
         else{
 
             this.setState({open: false});
-            store.createEvent(this.state.valueDay, this.state.valueStart, this.state.valueStop,(result)=>{});
+            store.updateSchedule(this.state.valueDay, this.state.valueStart, this.state.valueStop, 0,(result)=>{});
             if (this.state.valueDay == 0){
                 this.state.events.monday.push({
                     startTime: this.state.valueStart,
@@ -356,49 +356,49 @@ class Calendar extends Component {
                         <TableRowColumn style={tableRowStyle}>
                             <div>
                             {this.state.events.monday.map( (row,index) => (
-                                <Event startTime={String(row.startTime) + ':00' } stopTime={String(row.stopTime) + ':00'} />
+                                <Event startTime={String(row.startTime)} stopTime={String(row.stopTime)} day={0}/>
                                 ))}
                             </div>
                         </TableRowColumn>
                         <TableRowColumn style={tableRowStyle}>
                             <div>
                             {this.state.events.tuesday.map( (row,index) => (
-                                <Event startTime={String(row.startTime) + ':00' } stopTime={String(row.stopTime) + ':00'} />
+                                <Event startTime={String(row.startTime)} stopTime={String(row.stopTime)} day={1}/>
                                 ))}
                             </div>
                         </TableRowColumn>
                         <TableRowColumn style={tableRowStyle}>
                             <div>
                             {this.state.events.wednesday.map( (row,index) => (
-                                <Event startTime={String(row.startTime) + ':00' } stopTime={String(row.stopTime) + ':00'} />
+                                <Event startTime={String(row.startTime)} stopTime={String(row.stopTime)} day={2}/>
                                 ))}
                             </div>
                         </TableRowColumn>
                         <TableRowColumn style={tableRowStyle}>
                             <div>
                             {this.state.events.thursday.map( (row,index) => (
-                                <Event startTime={String(row.startTime) + ':00' } stopTime={String(row.stopTime) + ':00'} />
+                                <Event startTime={String(row.startTime)} stopTime={String(row.stopTime)} day={3}/>
                                 ))}
                             </div>
                         </TableRowColumn>
                         <TableRowColumn style={tableRowStyle}>
                             <div>
                             {this.state.events.friday.map( (row,index) => (
-                                <Event startTime={String(row.startTime) + ':00' } stopTime={String(row.stopTime) + ':00'} />
+                                <Event startTime={String(row.startTime)} stopTime={String(row.stopTime)} day={4}/>
                                 ))}
                             </div>
                         </TableRowColumn>
                         <TableRowColumn style={tableRowStyle}>
                             <div>
                             {this.state.events.saturday.map( (row,index) => (
-                                <Event startTime={String(row.startTime) + ':00' } stopTime={String(row.stopTime) + ':00'} />
+                                <Event startTime={String(row.startTime)} stopTime={String(row.stopTime)} day={5}/>
                                 ))}
                             </div>
                         </TableRowColumn>
                         <TableRowColumn style={tableRowStyle}>
                             <div>
                             {this.state.events.sunday.map( (row,index) => (
-                                <Event startTime={String(row.startTime) + ':00' } stopTime={String(row.stopTime) + ':00'} />
+                                <Event startTime={String(row.startTime) + ':00' } stopTime={String(row.stopTime) + ':00'} day={6}/>
                                 ))}
                             </div>
                         </TableRowColumn>
