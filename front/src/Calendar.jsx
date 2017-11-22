@@ -58,12 +58,12 @@ class Calendar extends Component {
 
     componentWillMount(){
         store.getEvents((results)=>{
-            console.log(results);
+            //console.log(results);
 
             for(var i = 0; i<7; i++){
                 for(var j = 0; j<18; j++){
-                    console.log(this.state.days[i][j]);                    
-                    console.log(results[this.state.days[i][j]]);
+                    // console.log(this.state.days[i][j]);                    
+                    // console.log(results[this.state.days[i][j]]);
                     
                     if(results[this.state.days[i][j]] == 0){
                         

@@ -10,6 +10,7 @@ import {
   import TextField from 'material-ui/TextField';
 import {orange500, blue500} from 'material-ui/styles/colors';
 import Slider from 'material-ui/Slider';
+import groupRegister from './groupRegister'
 
 
 const styles = {
@@ -35,16 +36,25 @@ class GroupForm extends Component {
         this.state = {
         finished : false,   
         stepIndex: 0,
-        slider: 5    
+        numberOfMembers: 5,
+        title: "Insira o Título aqui",
+        members: [],  
         }
     }
 
+    
+
     handleNext = () => {
         const {stepIndex} = this.state;
+        
         this.setState({
           stepIndex: stepIndex + 1,
           finished: stepIndex >= 2,
         });
+
+        if(this.state.stepIndex === 2){
+            groupRegister.registerGroup(this.state.title, this.refs.member1.getValue(), this.refs.member2.getValue());
+        }
     };
     
     handlePrev = () => {
@@ -55,8 +65,13 @@ class GroupForm extends Component {
     };
 
     handleSlider = (event, value) => {
-        this.setState({slider: value});
+        this.setState({numberOfMembers: value});
     };
+
+    handleTitle = (event, value) =>{
+        this.setState({title: value});
+    };
+
     
     getStepContent(stepIndex) {
         switch (stepIndex) {
@@ -69,7 +84,7 @@ class GroupForm extends Component {
             default:
                 return null;
         }
-    }
+    };
 
     form(stepIndex){
         switch (stepIndex) {
@@ -78,7 +93,8 @@ class GroupForm extends Component {
                     <div>
                     <br />
                     <TextField
-                        hintText=""
+                        value = {this.state.title}
+                        onChange = {this.handleTitle}
                         underlineFocusStyle={styles.underlineStyle}
                     /><br />
                     </div>
@@ -91,28 +107,30 @@ class GroupForm extends Component {
                         min={2}
                         max={10}
                         step={1}
-                        value={this.state.slider}
+                        value={this.state.numberOfMembers}
                         onChange={this.handleSlider}
                         />
                         <p>
                         <span>{'Membros: '}</span>
-                        <span>{this.state.slider}</span>
+                        <span>{this.state.numberOfMembers}</span>
                         </p>
                     </div>
                 );
 
             case 2:
-                switch (this.state.slider){
+                switch (this.state.numberOfMembers){
                     case 2:
                         return(
                             <div>
                             <br />
                             <TextField
+                                ref = "member1"
                                 hintText="Membro 1"
                                 underlineFocusStyle={styles.underlineStyle}
                             /><br />
                             <br />
                             <TextField
+                                ref = "member2"
                                 hintText="Membro 2"
                                 underlineFocusStyle={styles.underlineStyle}
                             /><br />

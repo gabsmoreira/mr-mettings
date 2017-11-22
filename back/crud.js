@@ -35,7 +35,7 @@ app.get('/user', function (req, res) {
 // CRIA
 app.post('/register', function (req, res) {
 //    var data = JSON.parse(req.body);
-   console.log(req);
+   //console.log(req);
 
     var name = req.body.name;
     var email = req.body.email;
@@ -280,3 +280,49 @@ app.post('/findSchedule', function (req, res){
 
 });
 
+// CRIA GRUPO
+app.post('/registerGroup', function (req, res) {
+    //    var data = JSON.parse(req.body);
+       //console.log(req);
+    
+        var title = req.body.title;
+        var member1 = req.body.member1;
+        var member2 = req.body.member2;
+        var id_user1;
+        var id_user2;
+
+        // console.log("ENTROU HERE")
+        
+    
+        connection.query("SELECT id FROM User WHERE name=?",[member1], function (error, results, fields) {
+            if (error) throw error;   
+                //res.json(req.body)
+                //console.log(results)
+                var data = JSON.stringify(results);
+                var json = JSON.parse(data);
+                id_user1 = json[0]['id'];
+                //console.log(number);
+                //res.json(id_user)
+                connection.query("SELECT id FROM User WHERE name=?",[member2], function (error, results, fields) {
+                    if (error) throw error;   
+                        //res.json(req.body)
+                        //console.log(results)
+                        var data = JSON.stringify(results);
+                        var json = JSON.parse(data);
+                        id_user2 = json[0]['id'];
+                        //console.log(number);
+                        //res.json(id_user)
+        
+                        connection.query("INSERT INTO Team (title, id_user1, id_user2) values(?, ?, ?)",[title, id_user1, id_user2], function (error, results, fields) {
+                            if (error) throw error;   
+                        }); 
+                }); 
+
+
+        }); 
+    
+    
+    
+        
+    
+    });
