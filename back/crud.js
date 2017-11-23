@@ -285,11 +285,11 @@ function getId(user,callback) {
     connection.query("SELECT id FROM User WHERE name=?",[user], function (error, results, fields) {
         if (error) callback(error,null); 
         else{//res.json(req.body)
-            //console.log(results)
             var data = JSON.stringify(results);
             var json = JSON.parse(data);
             id = json[0]['id'];
-            callback(null,id)
+            return this.results;
+            
         }  
             
     });
@@ -307,21 +307,17 @@ app.post('/registerGroup', function (req, res) {
         var listQuery =[title];
         var members = JSON.stringify(members);
         var members = JSON.parse(members)
-        var data1 = null
-        console.log(members)
         
         // var query ="INSERT INTO Team (title, id_user1, id_user2) values(?, ?, ?)"
         var query = "INSERT INTO Team (title, "
         var query2 = "values(?, ";
         
         for(var i = 1; i< numberMembers + 1; i++){
-            getId(members['member' + String(i)],function(err,data){
-                console.log("ID DEPOIS: " + data);
-                data1 = data;
+            console.log(getId(members['member' + String(i)],function(err,data){}));
+                
 
 
-            });
-            console.log("SAIU: " + data1);
+            
             if(i == numberMembers){
                 query += ("id_user" + String(i) + ") ");
                 query2 += "?)"
