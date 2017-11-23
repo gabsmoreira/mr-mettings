@@ -18,7 +18,7 @@ app.listen(3001, function () {
 var connection = mysql.createConnection({
     host : 'localhost',
     user : 'root',
-    password : '160520',
+    password : '1234',
     database : 'mrmeetings'
     })
 
@@ -280,47 +280,67 @@ app.post('/findSchedule', function (req, res){
 
 });
 
+function getId(user,callback) {
+    var id = null;
+    connection.query("SELECT id FROM User WHERE name=?",[user], function (error, results, fields) {
+        if (error) callback(error,null); 
+        else{//res.json(req.body)
+            //console.log(results)
+            var data = JSON.stringify(results);
+            var json = JSON.parse(data);
+            id = json[0]['id'];
+            callback(null,id)
+        }  
+            
+    });
+    
+}
+
 // CRIA GRUPO
 app.post('/registerGroup', function (req, res) {
     //    var data = JSON.parse(req.body);
        //console.log(req);
     
         var title = req.body.title;
-        var member1 = req.body.member1;
-        var member2 = req.body.member2;
-        var id_user1;
-        var id_user2;
-
-        // console.log("ENTROU HERE")
+        var members = req.body.members;
+        var numberMembers = req.body.numberMembers;
+        var listQuery =[title];
+        var members = JSON.stringify(members);
+        var members = JSON.parse(members)
+        var data1 = null
+        console.log(members)
         
-    
-        connection.query("SELECT id FROM User WHERE name=?",[member1], function (error, results, fields) {
+        // var query ="INSERT INTO Team (title, id_user1, id_user2) values(?, ?, ?)"
+        var query = "INSERT INTO Team (title, "
+        var query2 = "values(?, ";
+        
+        for(var i = 1; i< numberMembers + 1; i++){
+            getId(members['member' + String(i)],function(err,data){
+                console.log("ID DEPOIS: " + data);
+                data1 = data;
+
+
+            });
+            console.log("SAIU: " + data1);
+            if(i == numberMembers){
+                query += ("id_user" + String(i) + ") ");
+                query2 += "?)"
+            }
+            else{
+                query += ("id_user" + String(i) + ", ");
+                query2 += "?, "
+            }  
+        }
+        query = query + query2;
+        console.log(query);
+        console.log(listQuery);
+        
+
+ 
+        connection.query(query,listQuery, function (error, results, fields) {
             if (error) throw error;   
-                //res.json(req.body)
-                //console.log(results)
-                var data = JSON.stringify(results);
-                var json = JSON.parse(data);
-                id_user1 = json[0]['id'];
-                //console.log(number);
-                //res.json(id_user)
-                connection.query("SELECT id FROM User WHERE name=?",[member2], function (error, results, fields) {
-                    if (error) throw error;   
-                        //res.json(req.body)
-                        //console.log(results)
-                        var data = JSON.stringify(results);
-                        var json = JSON.parse(data);
-                        id_user2 = json[0]['id'];
-                        //console.log(number);
-                        //res.json(id_user)
-        
-                        connection.query("INSERT INTO Team (title, id_user1, id_user2) values(?, ?, ?)",[title, id_user1, id_user2], function (error, results, fields) {
-                            if (error) throw error;   
-                        }); 
-                }); 
-
-
         }); 
-    
+   
     
     
         
