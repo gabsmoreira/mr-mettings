@@ -37,8 +37,19 @@ class GroupForm extends Component {
         finished : false,   
         stepIndex: 0,
         numberOfMembers: 5,
-        title: "Insira o Título aqui",
-        members: [],  
+        title: null,
+        members: {
+            member1: null,
+            member2: null,
+            member3: null,
+            member4: null,
+            member5: null,
+            member6: null,
+            member7: null,
+            member8: null,
+            member9: null,
+            member10: null,
+        },  
         }
     }
 
@@ -53,7 +64,11 @@ class GroupForm extends Component {
         });
 
         if(this.state.stepIndex === 2){
-            groupRegister.registerGroup(this.state.title, this.refs.member1.getValue(), this.refs.member2.getValue());
+            for(var i = 1; i< this.state.numberOfMembers + 1; i++){
+                
+
+            }
+            groupRegister.registerGroup(this.state.title,this.state.members, this.state.numberOfMembers);
         }
     };
     
@@ -86,22 +101,34 @@ class GroupForm extends Component {
         }
     };
 
+
+    
+
+    handleMember = (event) => {
+        this.setState({ ...this.state, members: 
+          { ...this.state.members,[event.target.id] : event.target.value }}
+        )
+      }
+    
+
     renderFormMembers(num) {
         let FormMembers = [];
-        for(let i= 0; i < num; i++) {
-          stars.push(
+        for(let i= 1; i < num + 1; i++) {
+          FormMembers.push(
               <div>
                   <TextField
-                    ref = {'member1'}
-                    hintText="Membro 1"
+                    id={'member' + String(i)}
+                    hintText={"Membro " + String(i)}
                     underlineFocusStyle={styles.underlineStyle}
+                    onChange={this.handleMember}
+                    
                 /><br />
               </div>
             
           );
         }
         return (
-          <div>{stars}</div>
+          <div>{FormMembers}</div>
         );
       };
       
@@ -113,6 +140,7 @@ class GroupForm extends Component {
                     <div>
                     <br />
                     <TextField
+                        hintText="Nome da reunião"
                         value = {this.state.title}
                         onChange = {this.handleTitle}
                         underlineFocusStyle={styles.underlineStyle}
@@ -138,329 +166,9 @@ class GroupForm extends Component {
                 );
 
             case 2:
-                switch (this.state.numberOfMembers){
-                    case 2:
-                        return(
-                            <div>
-                            <br />
-                            <TextField
-                                ref = "member1"
-                                hintText="Membro 1"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                ref = "member2"
-                                hintText="Membro 2"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            </div>
-                        );
-                    case 3:
-                    return(
-                            <div>
-                            <br />
-                            <TextField
-                                hintText="Membro 1"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 2"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 3"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            </div>
-                        );
-                    case 4:
-                    return(
-                            <div>
-                            <br />
-                            <TextField
-                                hintText="Membro 1"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 2"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 3"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 4"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            </div>
-                        );
-                    case 5:
-                    return(
-                            <div>
-                            <br />
-                            <TextField
-                                hintText="Membro 1"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 2"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 3"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 4"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 5"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            </div>
-                        );
-
-                    case 6:
-                    return(
-                            <div>
-                            <br />
-                            <TextField
-                                hintText="Membro 1"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 2"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 3"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 4"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 5"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 6"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            </div>
-                        );
-                    case 7:
-                    return(
-                            <div>
-                            <br />
-                            <TextField
-                                hintText="Membro 1"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 2"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 3"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 4"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 5"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 6"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 7"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            </div>
-                        );
-                    case 8:
-                    return(
-                            <div>
-                            <br />
-                            <TextField
-                                hintText="Membro 1"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 2"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 3"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 4"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 5"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 6"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 7"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 8"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            </div>
-                        );
-                    case 9:
-                    return(
-                            <div>
-                            <br />
-                            <TextField
-                                hintText="Membro 1"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 2"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 3"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 4"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 5"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 6"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 7"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 8"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 9"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            </div>
-                        );
-
-                    case 10:
-                    return(
-                            <div>
-                            <br />
-                            <TextField
-                                hintText="Membro 1"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 2"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 3"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 4"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 5"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 6"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 7"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 8"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 9"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <br />
-                            <TextField
-                                hintText="Membro 10"
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            </div>
-                        );
-
-                }
-                
+            return(
+                this.renderFormMembers(this.state.numberOfMembers)
+            )
             default:
                 return null;
     
