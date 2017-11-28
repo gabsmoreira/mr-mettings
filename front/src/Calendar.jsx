@@ -406,7 +406,7 @@ class Calendar extends Component {
                         <TableRowColumn style={tableRowStyle}>
                             <div>
                             {this.state.events.sunday.map( (row,index) => (
-                                <Event startTime={String(row.startTime) + ':00' } stopTime={String(row.stopTime) + ':00'} day={6}/>
+                                <Event startTime={String(row.startTime)} stopTime={String(row.stopTime)} day={6}/>
                                 ))}
                             </div>
                         </TableRowColumn>
