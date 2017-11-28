@@ -49,7 +49,7 @@ class Event extends Component {
             <div>
                 {this.state.hidden ? null : 
             <Chip
-            backgroundColor={amber400}
+            backgroundColor={this.props.reunion?blue400: amber400}
             onRequestDelete={this.handleRequestDelete}
             onClick={this.handleTouchTap}
             style={styles.chip}>
