@@ -144,7 +144,7 @@ function updateSchedule(start, end, day, id, action){
                     if (error) throw error;
                     
                 });
-                if(action === 0){
+                if(action !== 1){
                     console.log('[BACKEND] Created event: ' + days[0][i-6]);
                 }else{
                     console.log('[BACKEND] Deleted event: ' + days[0][i-6]);
@@ -158,7 +158,7 @@ function updateSchedule(start, end, day, id, action){
                     if (error) throw error;
                     
                 });
-                if(action === 0){                         
+                if(action !== 1){                         
                     console.log('[BACKEND] Created event: ' + days[1][i-6]);                     
                 }else{
                     console.log('[BACKEND] Deleted event: ' + days[1][i-6]);                     
@@ -172,7 +172,7 @@ function updateSchedule(start, end, day, id, action){
                     if (error) throw error;
                     
                 });
-                if(action === 0){                         
+                if(action !== 1){                         
                     console.log('[BACKEND] Created event: ' + days[2][i-6]);                     
                 }else{                         
                     console.log('[BACKEND] Deleted event: ' + days[2][i-6]);                     
@@ -186,7 +186,7 @@ function updateSchedule(start, end, day, id, action){
                     if (error) throw error;
                     
                 });
-                if(action === 0){                         
+                if(action !== 1){                         
                     console.log('[BACKEND] Created event: ' + days[3][i-6]);                     
                 }else{                         
                     console.log('[BACKEND] Deleted event: ' + days[3][i-6]);                     
@@ -200,7 +200,7 @@ function updateSchedule(start, end, day, id, action){
                     if (error) throw error;
                     
                 });
-                if(action === 0){                         
+                if(action !== 1){                         
                     console.log('[BACKEND] Created event: ' + days[4][i-6]);                     
                 }else{                         
                     console.log('[BACKEND] Deleted event: ' + days[4][i-6]);                     
@@ -214,7 +214,7 @@ function updateSchedule(start, end, day, id, action){
                     if (error) throw error;
                     
                 });
-                if(action === 0){                         
+                if(action !== 1){                         
                     console.log('[BACKEND] Created event: ' + days[5][i-6]);                     
                 }else{                         
                     console.log('[BACKEND] Deleted event: ' + days[5][i-6]);                     
@@ -228,7 +228,7 @@ function updateSchedule(start, end, day, id, action){
                     if (error) throw error;
                     
                 });
-                if(action === 0){                         
+                if(action !== 1){                         
                     console.log('[BACKEND] Created event: ' + days[6][i-6]);                     
                 }else{                         
                     console.log('[BACKEND] Deleted event: ' + days[6][i-6]);                     
@@ -440,7 +440,7 @@ function findSpareTime(){ // retorna o 1o horario livre de todos
     for(var i = 1; i< numberMembers; i++){ // Todos os membros a partir do 2o
         var schedule = teamSchedules[i];
         for(var j=0; j<spareTime.length; j++){
-            if(schedule[spareTime[j]] === 0){
+            if(schedule[spareTime[j]] !== 1){
                 spareTime.splice(j,1);
                 j--;
             }

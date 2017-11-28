@@ -8,7 +8,7 @@ import SvgIconFace from 'material-ui/svg-icons/action/face';
 import {blue300, indigo900, amber400} from 'material-ui/styles/colors';
 import store from './store';
 
-import {amber500,amber700, blue500, grey300, grey400, grey200, grey600, grey800, grey900, grey500, grey50} from 'material-ui/styles/colors';
+import {amber500,amber700, blue400, blue500, grey300, grey400, grey200, grey600, grey800, grey900, grey500, grey50} from 'material-ui/styles/colors';
 
 
 
