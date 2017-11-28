@@ -389,7 +389,6 @@ app.post('/updateSchedule', function (req, res){
 
 app.post('/findSchedule', function (req, res){
     var id = req.body.id;
-    events = [[],[],[],[],[],[]]
 
     connection.query("SELECT * FROM Schedule WHERE  id_user=?",[id],  function (error, results, fields) {
         if (error) throw error;
@@ -464,7 +463,7 @@ function getId(user) {
                 // console.log("end: " + end)
 
                 for(var i = 1; i<numberMembers+1; i++){
-                    updateSchedule(start, end, day, listQuery[i], 0);
+                    updateSchedule(start, end, day, listQuery[i], 2);
                 }
 
                 
