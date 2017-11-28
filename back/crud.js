@@ -145,7 +145,121 @@ app.post('/delete', function (req, res){
 });
 
 ////////////////////////////////////////////////////////////////////
+function updateSchedule(start, end, day, id, action){
 
+    switch(day){
+        case 0:
+            for (i = start; i < end; i++){
+                //console.log(days[0][i-6]);
+                qry = "UPDATE Schedule SET "+days[0][i-6]+"=? WHERE id_user=?";
+                connection.query(qry,[action, id],  function (error, results, fields) {
+                    if (error) throw error;
+                    
+                    //res.json(results)
+                });
+                // console.log(i)
+                if(action === 0){
+                    console.log('[BACKEND] Created event: ' + days[0][i-6]);
+                }else{
+                    console.log('[BACKEND] Deleted event: ' + days[0][i-6]);
+                }
+            }
+            break;
+        case 1:
+            for (i = start; i < end; i++){
+                qry = "UPDATE Schedule SET "+days[1][i-6]+"=? WHERE id_user=?";
+                connection.query(qry,[action, id],  function (error, results, fields) {
+                    if (error) throw error;
+                    
+                    //res.json(results)
+                });
+                if(action === 0){                         
+                    console.log('[BACKEND] Created event: ' + days[1][i-6]);                     
+                }else{
+                    console.log('[BACKEND] Deleted event: ' + days[1][i-6]);                     
+                }
+            }
+            break;
+        case 2:
+            for (i = start; i < end; i++){
+                qry = "UPDATE Schedule SET "+days[2][i-6]+"=? WHERE id_user=?";
+                connection.query(qry,[action, id],  function (error, results, fields) {
+                    if (error) throw error;
+                    
+                    //res.json(results)
+                });
+                if(action === 0){                         
+                    console.log('[BACKEND] Created event: ' + days[2][i-6]);                     
+                }else{                         
+                    console.log('[BACKEND] Deleted event: ' + days[2][i-6]);                     
+                }
+            }
+            break;
+        case 3:
+            for (i = start; i < end; i++){
+                qry = "UPDATE Schedule SET "+days[3][i-6]+"=? WHERE id_user=?";
+                connection.query(qry,[action, id],  function (error, results, fields) {
+                    if (error) throw error;
+                    
+                    //res.json(results)
+                });
+                if(action === 0){                         
+                    console.log('[BACKEND] Created event: ' + days[3][i-6]);                     
+                }else{                         
+                    console.log('[BACKEND] Deleted event: ' + days[3][i-6]);                     
+                }
+            }
+            break;
+        case 4:
+            for (i = start; i < end; i++){
+                qry = "UPDATE Schedule SET "+days[4][i-6]+"=? WHERE id_user=?";
+                connection.query(qry,[action, id],  function (error, results, fields) {
+                    if (error) throw error;
+                    
+                    //res.json(results)
+                });
+                if(action === 0){                         
+                    console.log('[BACKEND] Created event: ' + days[4][i-6]);                     
+                }else{                         
+                    console.log('[BACKEND] Deleted event: ' + days[4][i-6]);                     
+                }
+            }
+            break;
+        case 5:
+            for (i = start; i < end; i++){
+                qry = "UPDATE Schedule SET "+days[5][i-6]+"=? WHERE id_user=?";
+                connection.query(qry,[action, id],  function (error, results, fields) {
+                    if (error) throw error;
+                    
+                    //res.json(results)
+                });
+                if(action === 0){                         
+                    console.log('[BACKEND] Created event: ' + days[5][i-6]);                     
+                }else{                         
+                    console.log('[BACKEND] Deleted event: ' + days[5][i-6]);                     
+                }
+            }
+            break;
+        case 6:
+            for (i = start; i < end; i++){
+                qry = "UPDATE Schedule SET "+days[6][i-6]+"=? WHERE id_user=?";
+                connection.query(qry,[action, id],  function (error, results, fields) {
+                    if (error) throw error;
+                    
+                    //res.json(results)
+                });
+                if(action === 0){                         
+                    console.log('[BACKEND] Created event: ' + days[6][i-6]);                     
+                }else{                         
+                    console.log('[BACKEND] Deleted event: ' + days[6][i-6]);                     
+                }
+            }
+            break;
+        default:
+            break;
+    }
+
+}
 //Update Schedule
 app.post('/updateSchedule', function (req, res){
     var start = req.body.start;
@@ -282,6 +396,7 @@ app.post('/findSchedule', function (req, res){
         var data = JSON.stringify(results);
         var json = JSON.parse(data);
         var days = json[0];
+        console.log(days);
         res.json(days);
 
     });
@@ -304,6 +419,7 @@ function getId(user) {
     function setID(valor){
         var data = JSON.stringify(valor);
         var json = JSON.parse(data);
+        console.log(json[0]);
         idMembro = json[0]['id'];
         listQuery.push(idMembro);
         countQuery++;
@@ -321,7 +437,36 @@ function getId(user) {
                 // console.log(teamSchedules);
                 // console.log("moday 6: "+teamSchedules[0]['monday_6']);
 
-                reunion = findSpareTime();
+                var reunion = findSpareTime();
+                var day = reunion[0]+reunion[1]+reunion[2];
+                var translateList = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+                console.log(reunion);
+
+                for(var i=0; i<7;i++){
+                    if(day === translateList[i]){
+                        day = i;
+                    }
+                }
+
+                if(reunion[reunion.length-2] === "_"){
+                    var start = reunion[reunion.length-1];
+                }else{
+                    var start = reunion.substring(reunion.length-2,reunion.length);
+                }
+
+                start = parseInt(start);
+                
+                
+                var end = start + 1;
+                
+                console.log("day: " + day);
+                console.log("start: " + start);
+                console.log("end: " + end)
+
+                for(var i = 1; i<numberMembers+1; i++){
+                    updateSchedule(start, end, day, listQuery[i], 0);
+                }
+
                 
             }
         });
@@ -332,24 +477,39 @@ function getId(user) {
 }
 
 function findSpareTime(){ // retorna o 1o horario livre de todos
-    spareTime = [];
+    var spareTime = [];
 
-    firstMember = teamSchedules[0];
+    var firstMember = teamSchedules[0];
+
+    // console.log(teamSchedules);
 
     for(var i = 0; i<7; i++){
         for(var j = 0; j<18; j++){
             if(firstMember[days[i][j]] ===  1){
-                spareTime.push[days[i][j]];
+                spareTime.push(days[i][j]);
             }
         }
-        
     }
-
-    console.log(spareTime);
 
     for(var i = 1; i< numberMembers; i++){ // Todos os membros a partir do 2o
-        
+        var schedule = teamSchedules[i];
+        // console.log("ANALISANDO O MEMBRO: "+String(i+1));
+        for(var j=0; j<spareTime.length; j++){
+            // console.log("horario: "+spareTime[j]);
+            // console.log("ocupado(0) ou livre(1): "+schedule[spareTime[j]]);
+            if(schedule[spareTime[j]] === 0){
+                // console.log("TIRAR: "+spareTime[j])
+                // console.log("ANTES: "+ spareTime);
+                spareTime.splice(j,1);
+                // console.log("DEPOIS: "+spareTime);
+                j--;
+            }
+        }
     }
+
+    // console.log("spare: "+spareTime);
+
+    return spareTime[0];
 }
 
 function makeQueryString(){

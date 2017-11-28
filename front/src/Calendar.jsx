@@ -65,14 +65,14 @@ class Calendar extends Component {
                     // console.log(this.state.days[i][j]);                    
                     // console.log(results[this.state.days[i][j]]);
                     
-                    if(results[this.state.days[i][j]] == 0){
+                    if(results[this.state.days[i][j]] === 0){
                         
-                        if(this.state.valueStart == 0){
-                            this.setState({valueStart: j+6});
+                        if(this.state.valueStart === 0){
+                            this.setState({valueStart: j+5});
                         }
                     }else{
-                        if(this.state.valueStart != 0){
-                            this.setState({valueStop: j+6});
+                        if(this.state.valueStart !== 0){
+                            this.setState({valueStop: j+5});
                             this.setState({valueDay: i});
                             this.getEvent();
                             this.setState({valueStart: 0});
@@ -276,7 +276,7 @@ class Calendar extends Component {
         const hours = ['06:00','07:00','08:00','09:00',
                         '10:00','11:00','12:00','13:00','14:00',
                         '15:00','16:00','17:00','18:00','19:00',
-                        '20:00','21:00','22:00','23:00']
+                        '20:00','21:00','22:00','23:00', '24:00']
         const days = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"]
 
         const tableRowStyle = {
