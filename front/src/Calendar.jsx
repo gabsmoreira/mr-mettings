@@ -59,14 +59,18 @@ class Calendar extends Component {
 
     componentWillMount(){
         store.getEvents((results)=>{
-            //console.log(results);
-
+            console.log(results);
             for(var i = 0; i<7; i++){
                 for(var j = 0; j<18; j++){
                     // console.log(this.state.days[i][j]);                    
                     // console.log(results[this.state.days[i][j]]);
 
-                    if(results[this.state.days[i][j]] === 2){
+                    if(results[this.state.days[i][j]] === 2){ // se for meeting
+                        if(this.state.valueStart !== 0){
+                            this.setState({valueStop: j+6});
+                            this.setState({valueDay: i});
+                            this.getEvent();
+                        }
                         this.setState({valueStart: j+6});
                         this.setState({valueStop: j+7});
                         this.setState({valueDay: i});
@@ -76,15 +80,16 @@ class Calendar extends Component {
                         this.setState({valueStop: 0});
                         this.setState({valueDay: 0});
                         this.setState({isReunion: false});
-                        continue;
                     }
-                    
-                    if(results[this.state.days[i][j]] === 0){
-                        
+
+                    if(results[this.state.days[i][j]] === 0){ // se tiver ocupado
                         if(this.state.valueStart === 0){
                             this.setState({valueStart: j+6});
                         }
-                    }else{
+
+                    }
+
+                    if(results[this.state.days[i][j]] === 1){ // se tiver livre
                         if(this.state.valueStart !== 0){
                             this.setState({valueStop: j+6});
                             this.setState({valueDay: i});
@@ -92,8 +97,10 @@ class Calendar extends Component {
                             this.setState({valueStart: 0});
                             this.setState({valueStop: 0});
                             this.setState({valueDay: 0});
-                        }
+                        }   
                     }
+                    
+                    
                 }
                 if(this.state.valueStart !== 0){
                     this.setState({valueStop: 24});
