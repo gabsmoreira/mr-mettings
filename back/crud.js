@@ -49,9 +49,6 @@ app.get('/user', function (req, res) {
 
 // CRIA
 app.post('/register', function (req, res) {
-//    var data = JSON.parse(req.body);
-   //console.log(req);
-
     var name = req.body.name;
     var email = req.body.email;
     var password = req.body.password;
@@ -65,12 +62,9 @@ app.post('/register', function (req, res) {
 
     connection.query("SELECT id FROM User WHERE name=?",[name], function (error, results, fields) {
         if (error) throw error;   
-            //res.json(req.body)
-            //console.log(results)
             var data = JSON.stringify(results);
             var json = JSON.parse(data);
             id_user = json[0]['id'];
-            //console.log(number);
             res.json(id_user)
             connection.query("INSERT INTO Schedule (id_user) values(?)",[id_user], function (error, results, fields) {
                 if (error) throw error;   
@@ -87,9 +81,6 @@ app.post('/register', function (req, res) {
 // LOGIN
 
 app.post('/login', function (req, res) {
-//    var data = JSON.parse(req.body);
-//    console.log(req);
-
     var name = req.body.name;
     var password = req.body.password;
 
@@ -106,7 +97,6 @@ app.post('/login', function (req, res) {
                 var json = JSON.parse(data);
                 id_user = json[0]['id'];
                 res.json(id_user);
-                // localStorage.setItem('id', id_user)
             });
 
         }   
@@ -133,7 +123,6 @@ app.post('/update', function (req, res){
 });
 
 
-//DELETE    
 
 app.post('/delete', function (req, res){
     var user_id = req.body.id
@@ -144,7 +133,6 @@ app.post('/delete', function (req, res){
     });
 });
 
-////////////////////////////////////////////////////////////////////
 function updateSchedule(start, end, day, id, action){
 
     switch(day){
@@ -155,9 +143,7 @@ function updateSchedule(start, end, day, id, action){
                 connection.query(qry,[action, id],  function (error, results, fields) {
                     if (error) throw error;
                     
-                    //res.json(results)
                 });
-                // console.log(i)
                 if(action === 0){
                     console.log('[BACKEND] Created event: ' + days[0][i-6]);
                 }else{
@@ -171,7 +157,6 @@ function updateSchedule(start, end, day, id, action){
                 connection.query(qry,[action, id],  function (error, results, fields) {
                     if (error) throw error;
                     
-                    //res.json(results)
                 });
                 if(action === 0){                         
                     console.log('[BACKEND] Created event: ' + days[1][i-6]);                     
@@ -186,7 +171,6 @@ function updateSchedule(start, end, day, id, action){
                 connection.query(qry,[action, id],  function (error, results, fields) {
                     if (error) throw error;
                     
-                    //res.json(results)
                 });
                 if(action === 0){                         
                     console.log('[BACKEND] Created event: ' + days[2][i-6]);                     
@@ -201,7 +185,6 @@ function updateSchedule(start, end, day, id, action){
                 connection.query(qry,[action, id],  function (error, results, fields) {
                     if (error) throw error;
                     
-                    //res.json(results)
                 });
                 if(action === 0){                         
                     console.log('[BACKEND] Created event: ' + days[3][i-6]);                     
@@ -216,7 +199,6 @@ function updateSchedule(start, end, day, id, action){
                 connection.query(qry,[action, id],  function (error, results, fields) {
                     if (error) throw error;
                     
-                    //res.json(results)
                 });
                 if(action === 0){                         
                     console.log('[BACKEND] Created event: ' + days[4][i-6]);                     
@@ -231,7 +213,6 @@ function updateSchedule(start, end, day, id, action){
                 connection.query(qry,[action, id],  function (error, results, fields) {
                     if (error) throw error;
                     
-                    //res.json(results)
                 });
                 if(action === 0){                         
                     console.log('[BACKEND] Created event: ' + days[5][i-6]);                     
@@ -246,7 +227,6 @@ function updateSchedule(start, end, day, id, action){
                 connection.query(qry,[action, id],  function (error, results, fields) {
                     if (error) throw error;
                     
-                    //res.json(results)
                 });
                 if(action === 0){                         
                     console.log('[BACKEND] Created event: ' + days[6][i-6]);                     
@@ -274,14 +254,11 @@ app.post('/updateSchedule', function (req, res){
     switch(day){
         case 0:
             for (i = start; i < end; i++){
-                //console.log(days[0][i-6]);
                 qry = "UPDATE Schedule SET "+days[0][i-6]+"=? WHERE id_user=?";
                 connection.query(qry,[action, id],  function (error, results, fields) {
                     if (error) throw error;
                     
-                    //res.json(results)
                 });
-                // console.log(i)
                 if(action !== 1){
                     console.log('[BACKEND] Created event: ' + days[0][i-6]);
                 }else{
@@ -295,7 +272,6 @@ app.post('/updateSchedule', function (req, res){
                 connection.query(qry,[action, id],  function (error, results, fields) {
                     if (error) throw error;
                     
-                    //res.json(results)
                 });
                 if(action !== 1){                         
                     console.log('[BACKEND] Created event: ' + days[1][i-6]);                     
@@ -310,7 +286,6 @@ app.post('/updateSchedule', function (req, res){
                 connection.query(qry,[action, id],  function (error, results, fields) {
                     if (error) throw error;
                     
-                    //res.json(results)
                 });
                 if(action !== 1){                         
                     console.log('[BACKEND] Created event: ' + days[2][i-6]);                     
@@ -325,7 +300,6 @@ app.post('/updateSchedule', function (req, res){
                 connection.query(qry,[action, id],  function (error, results, fields) {
                     if (error) throw error;
                     
-                    //res.json(results)
                 });
                 if(action !== 1){                         
                     console.log('[BACKEND] Created event: ' + days[3][i-6]);                     
@@ -340,7 +314,6 @@ app.post('/updateSchedule', function (req, res){
                 connection.query(qry,[action, id],  function (error, results, fields) {
                     if (error) throw error;
                     
-                    //res.json(results)
                 });
                 if(action !== 1){                         
                     console.log('[BACKEND] Created event: ' + days[4][i-6]);                     
@@ -355,7 +328,6 @@ app.post('/updateSchedule', function (req, res){
                 connection.query(qry,[action, id],  function (error, results, fields) {
                     if (error) throw error;
                     
-                    //res.json(results)
                 });
                 if(action !== 1){                         
                     console.log('[BACKEND] Created event: ' + days[5][i-6]);                     
@@ -370,7 +342,6 @@ app.post('/updateSchedule', function (req, res){
                 connection.query(qry,[action, id],  function (error, results, fields) {
                     if (error) throw error;
                     
-                    //res.json(results)
                 });
                 if(action !== 1){                         
                     console.log('[BACKEND] Created event: ' + days[6][i-6]);                     
@@ -396,7 +367,6 @@ app.post('/findSchedule', function (req, res){
         var data = JSON.stringify(results);
         var json = JSON.parse(data);
         var days = json[0];
-        //console.log(days);
         res.json(days);
 
     });
@@ -408,7 +378,7 @@ function getId(user) {
     
     connection.query("SELECT id FROM User WHERE name=?",[user], function (error, results, fields) {
         if (error) callback(error,null); 
-        else{//res.json(req.body)
+        else{
             setID(results);
             
             
@@ -419,12 +389,10 @@ function getId(user) {
     function setID(valor){
         var data = JSON.stringify(valor);
         var json = JSON.parse(data);
-        //console.log(json[0]);
         idMembro = json[0]['id'];
         listQuery.push(idMembro);
         countQuery++;
         connection.query("SELECT * FROM Schedule WHERE id_user=?",[idMembro], function(error, results, fields){
-            //console.log(results);
             var data = JSON.stringify(results);
             var json = JSON.parse(data);
             teamSchedules.push(json[0]);
@@ -434,55 +402,34 @@ function getId(user) {
                 connection.query(qry,listQuery, function (error, results, fields) {
                     if (error) throw error;   
                 }); 
-                // console.log(teamSchedules);
-                // console.log("moday 6: "+teamSchedules[0]['monday_6']);
-
                 var reunion = findSpareTime();
                 var day = reunion[0]+reunion[1]+reunion[2];
                 var translateList = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
-                //console.log(reunion);
-
                 for(var i=0; i<7;i++){
                     if(day === translateList[i]){
                         day = i;
                     }
                 }
-
                 if(reunion[reunion.length-2] === "_"){
                     var start = reunion[reunion.length-1];
                 }else{
                     var start = reunion.substring(reunion.length-2,reunion.length);
                 }
-
                 start = parseInt(start);
-                
-                
                 var end = start + 1;
-                
-                // console.log("day: " + day);
-                // console.log("start: " + start);
-                // console.log("end: " + end)
-
                 for(var i = 1; i<numberMembers+1; i++){
                     updateSchedule(start, end, day, listQuery[i], 0);
                 }
-
-                
             }
         });
     }
-    //console.log("idMembro fora: "+idMembro);
     return idMembro;
     
 }
 
 function findSpareTime(){ // retorna o 1o horario livre de todos
     var spareTime = [];
-
     var firstMember = teamSchedules[0];
-
-    // console.log(teamSchedules);
-
     for(var i = 0; i<7; i++){
         for(var j = 0; j<18; j++){
             if(firstMember[days[i][j]] ===  1){
@@ -493,21 +440,14 @@ function findSpareTime(){ // retorna o 1o horario livre de todos
 
     for(var i = 1; i< numberMembers; i++){ // Todos os membros a partir do 2o
         var schedule = teamSchedules[i];
-        // console.log("ANALISANDO O MEMBRO: "+String(i+1));
         for(var j=0; j<spareTime.length; j++){
-            // console.log("horario: "+spareTime[j]);
-            // console.log("ocupado(0) ou livre(1): "+schedule[spareTime[j]]);
             if(schedule[spareTime[j]] === 0){
-                // console.log("TIRAR: "+spareTime[j])
-                // console.log("ANTES: "+ spareTime);
                 spareTime.splice(j,1);
-                // console.log("DEPOIS: "+spareTime);
                 j--;
             }
         }
     }
 
-    // console.log("spare: "+spareTime);
 
     return spareTime[0];
 }
@@ -536,8 +476,6 @@ function makeQueryString(){
 
 // CRIA GRUPO
 app.post('/registerGroup', function (req, res) {
-    //    var data = JSON.parse(req.body);
-       //console.log(req);
 
         countQuery = 0;
         countSchedules = 0;
@@ -549,7 +487,6 @@ app.post('/registerGroup', function (req, res) {
         var members = JSON.stringify(members);
         var members = JSON.parse(members);
         
-        // var query ="INSERT INTO Team (title, id_user1, id_user2) values(?, ?, ?)"
         
         
         for(var i = 1; i< numberMembers + 1; i++){
@@ -558,23 +495,8 @@ app.post('/registerGroup', function (req, res) {
 
 
         
-        //console.log(listQuery);
 
  
     
     });
 
-    // var someVar = [];
-    
-    // connection.query("select * from ROOMS", function(err, rows){
-    //   if(err) {
-    //     throw err;
-    //   } else {
-    //     setValue(rows);
-    //   }
-    // });
-    
-    // function setValue(value) {
-    //   someVar = value;
-    //   console.log(someVar);
-    // }
