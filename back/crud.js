@@ -282,7 +282,7 @@ app.post('/updateSchedule', function (req, res){
                     //res.json(results)
                 });
                 // console.log(i)
-                if(action === 0){
+                if(action !== 1){
                     console.log('[BACKEND] Created event: ' + days[0][i-6]);
                 }else{
                     console.log('[BACKEND] Deleted event: ' + days[0][i-6]);
@@ -297,7 +297,7 @@ app.post('/updateSchedule', function (req, res){
                     
                     //res.json(results)
                 });
-                if(action === 0){                         
+                if(action !== 1){                         
                     console.log('[BACKEND] Created event: ' + days[1][i-6]);                     
                 }else{
                     console.log('[BACKEND] Deleted event: ' + days[1][i-6]);                     
@@ -312,7 +312,7 @@ app.post('/updateSchedule', function (req, res){
                     
                     //res.json(results)
                 });
-                if(action === 0){                         
+                if(action !== 1){                         
                     console.log('[BACKEND] Created event: ' + days[2][i-6]);                     
                 }else{                         
                     console.log('[BACKEND] Deleted event: ' + days[2][i-6]);                     
@@ -327,7 +327,7 @@ app.post('/updateSchedule', function (req, res){
                     
                     //res.json(results)
                 });
-                if(action === 0){                         
+                if(action !== 1){                         
                     console.log('[BACKEND] Created event: ' + days[3][i-6]);                     
                 }else{                         
                     console.log('[BACKEND] Deleted event: ' + days[3][i-6]);                     
@@ -342,7 +342,7 @@ app.post('/updateSchedule', function (req, res){
                     
                     //res.json(results)
                 });
-                if(action === 0){                         
+                if(action !== 1){                         
                     console.log('[BACKEND] Created event: ' + days[4][i-6]);                     
                 }else{                         
                     console.log('[BACKEND] Deleted event: ' + days[4][i-6]);                     
@@ -357,7 +357,7 @@ app.post('/updateSchedule', function (req, res){
                     
                     //res.json(results)
                 });
-                if(action === 0){                         
+                if(action !== 1){                         
                     console.log('[BACKEND] Created event: ' + days[5][i-6]);                     
                 }else{                         
                     console.log('[BACKEND] Deleted event: ' + days[5][i-6]);                     
@@ -372,7 +372,7 @@ app.post('/updateSchedule', function (req, res){
                     
                     //res.json(results)
                 });
-                if(action === 0){                         
+                if(action !== 1){                         
                     console.log('[BACKEND] Created event: ' + days[6][i-6]);                     
                 }else{                         
                     console.log('[BACKEND] Deleted event: ' + days[6][i-6]);                     
