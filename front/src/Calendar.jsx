@@ -24,7 +24,7 @@ import {
     TableRowColumn,
   } from 'material-ui/Table';
 
-import {amber500,amber700, amber400, blue500, grey300, grey400, grey200, grey600, grey800, grey900, grey500, grey50} from 'material-ui/styles/colors';
+import {amber500,amber700, amber400, blue400, grey300, grey400, grey200, grey600, grey800, grey900, grey500, grey50} from 'material-ui/styles/colors';
 
 
 
