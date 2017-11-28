@@ -396,7 +396,7 @@ app.post('/findSchedule', function (req, res){
         var data = JSON.stringify(results);
         var json = JSON.parse(data);
         var days = json[0];
-        console.log(days);
+        //console.log(days);
         res.json(days);
 
     });
@@ -419,7 +419,7 @@ function getId(user) {
     function setID(valor){
         var data = JSON.stringify(valor);
         var json = JSON.parse(data);
-        console.log(json[0]);
+        //console.log(json[0]);
         idMembro = json[0]['id'];
         listQuery.push(idMembro);
         countQuery++;
@@ -440,7 +440,7 @@ function getId(user) {
                 var reunion = findSpareTime();
                 var day = reunion[0]+reunion[1]+reunion[2];
                 var translateList = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
-                console.log(reunion);
+                //console.log(reunion);
 
                 for(var i=0; i<7;i++){
                     if(day === translateList[i]){
@@ -459,9 +459,9 @@ function getId(user) {
                 
                 var end = start + 1;
                 
-                console.log("day: " + day);
-                console.log("start: " + start);
-                console.log("end: " + end)
+                // console.log("day: " + day);
+                // console.log("start: " + start);
+                // console.log("end: " + end)
 
                 for(var i = 1; i<numberMembers+1; i++){
                     updateSchedule(start, end, day, listQuery[i], 0);
