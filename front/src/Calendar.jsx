@@ -43,6 +43,7 @@ class Calendar extends Component {
         valueStart: 0,
         valueStop: 0,
         valueDay: 0,
+        isReunion: false,
         days : [["monday_6","monday_7","monday_8","monday_9","monday_10","monday_11","monday_12","monday_13","monday_14","monday_15","monday_16","monday_17","monday_18","monday_19","monday_20","monday_21","monday_22","monday_23"],
         ["tuesday_6","tuesday_7","tuesday_8","tuesday_9","tuesday_10","tuesday_11","tuesday_12","tuesday_13","tuesday_14","tuesday_15","tuesday_16","tuesday_17","tuesday_18","tuesday_19","tuesday_20","tuesday_21","tuesday_22","tuesday_23"],
         ["wednesday_6","wednesday_7","wednesday_8","wednesday_9","wednesday_10","wednesday_11","wednesday_12","wednesday_13","wednesday_14","wednesday_15","wednesday_16","wednesday_17","wednesday_18","wednesday_19","wednesday_20","wednesday_21","wednesday_22","wednesday_23"],
