@@ -19,7 +19,8 @@ class Event extends Component {
     super(props);
     this.state = {
       error : '',   
-      hidden: false
+      hidden: false,
+      startTime: this.props.startTime
     }
   }
 
@@ -31,14 +32,15 @@ class Event extends Component {
     }
 
     handleTouchTap() {
-        alert('You clicked the Chip.');
+        alert(this.state.startTime);
     }
 
     render() {
         const styles = {
             chip: {
               margin: 7,
-              visibility: this.state.hidden
+              visibility: this.state.hidden,
+              height: (parseInt(this.props.stopTime)  - parseInt(this.props.startTime))*32
             }
         };
           
@@ -51,11 +53,11 @@ class Event extends Component {
             <Chip
             backgroundColor={amber400}
             onRequestDelete={this.handleRequestDelete}
-            onClick={this.handleTouchTap}
+            onClick={this.handleTouchTap.bind(this)}
             style={styles.chip}>
                 <Avatar size={32} color={'black'} backgroundColor={amber700}>
                 </Avatar>
-                {String(this.props.startTime) + ':00'} - {String(this.props.stopTime) + ':00'}
+                {this.props.startTime + ':00'} - {this.props.stopTime + ':00'}
             </Chip>} 
 
             </div>
