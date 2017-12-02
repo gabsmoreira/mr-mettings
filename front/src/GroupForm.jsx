@@ -37,6 +37,8 @@ class GroupForm extends Component {
         finished : false,   
         stepIndex: 0,
         numberOfMembers: 5,
+        meetingDuration: 1,
+        multipleHours: false,
         title: null,
         members: {
             member1: null,
@@ -60,15 +62,12 @@ class GroupForm extends Component {
         
         this.setState({
           stepIndex: stepIndex + 1,
-          finished: stepIndex >= 2,
+          finished: stepIndex >= 3,
         });
 
-        if(this.state.stepIndex === 2){
-            for(var i = 1; i< this.state.numberOfMembers + 1; i++){
-                
-
-            }
-            groupRegister.registerGroup(this.state.title,this.state.members, this.state.numberOfMembers);
+        if(this.state.stepIndex === 3){
+            
+            groupRegister.registerGroup(this.state.title,this.state.members, this.state.numberOfMembers, this.state.meetingDuration);
         }
     };
     
@@ -83,6 +82,15 @@ class GroupForm extends Component {
         this.setState({numberOfMembers: value});
     };
 
+    handleSlider2 = (event, value) => {
+        this.setState({meetingDuration: value});
+        if(value > 1){
+            this.setState({multipleHours: true})
+        }else{
+            this.setState({multipleHours: false})
+        }
+    };
+
     handleTitle = (event, value) =>{
         this.setState({title: value});
     };
@@ -93,8 +101,10 @@ class GroupForm extends Component {
             case 0:
                 return 'Qual será o tópico discutido?';
             case 1:
-                return 'Quantas pessoas vão participar?';
+                return 'Quanto tempo vai durar?'
             case 2:
+                return 'Quantas pessoas vão participar?';
+            case 3:
                 return 'Com quem será discutido?';
             default:
                 return null;
@@ -149,6 +159,23 @@ class GroupForm extends Component {
                 );
 
             case 1:
+            return(
+                    <div>
+                        <Slider
+                        min={1}
+                        max={10}
+                        step={1}
+                        value={this.state.meetingDuration}
+                        onChange={this.handleSlider2}
+                        />
+                        <p>
+                        <span>{'Duração: '}</span>
+                        <span>{this.state.multipleHours?this.state.meetingDuration + " horas": this.state.meetingDuration + " hora"}</span>
+                        </p>
+                    </div>
+                );
+
+            case 2:
                 return(
                     <div>
                         <Slider
@@ -165,7 +192,7 @@ class GroupForm extends Component {
                     </div>
                 );
 
-            case 2:
+            case 3:
             return(
                 this.renderFormMembers(this.state.numberOfMembers)
             )
@@ -181,10 +208,13 @@ class GroupForm extends Component {
         const {finished, stepIndex} = this.state;
         const contentStyle = {margin: '0 16px'};
         return (
-        <div style={{width: '100%', maxWidth: 700, margin: 'auto'}}>
+        <div style={{width: '100%', maxWidth: 1050, margin: 'auto'}}>
             <Stepper activeStep={stepIndex}>
             <Step>
                 <StepLabel>Escolha um nome para sua reunião</StepLabel>
+            </Step>
+            <Step>
+                <StepLabel>Escolha a duração da reunião</StepLabel>
             </Step>
             <Step>
                 <StepLabel>Escolha o número de participantes</StepLabel>
@@ -220,7 +250,7 @@ class GroupForm extends Component {
                         style={{marginRight: 12}}
                         />
                         <RaisedButton
-                        label={stepIndex === 2 ? 'Finish' : 'Next'}
+                        label={stepIndex === 3 ? 'Finish' : 'Next'}
                         primary={true}
                         onClick={this.handleNext}
                         />

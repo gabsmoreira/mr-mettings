@@ -132,7 +132,7 @@ class App extends Component {
       marginLeft: '5%'
   }
 
-  if (this.state.auth === null){
+  if (this.state.auth === null || this.state.auth === 'undefined'){
     return (
       <div className="App">
         <MuiThemeProvider>

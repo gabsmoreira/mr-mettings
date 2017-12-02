@@ -40,6 +40,7 @@ class Calendar extends Component {
                 sunday:[]},
         open: false,
         openSnackbar: false,
+        isReunion: false,
         valueStart: 0,
         valueStop: 0,
         valueDay: 0,
@@ -91,6 +92,42 @@ class Calendar extends Component {
                 }
                 
             }
+
+            this.setState({isReunion: true});
+
+            for(var i = 0; i<7; i++){
+                for(var j = 0; j<18; j++){
+                    // console.log(this.state.days[i][j]);                    
+                    // console.log(results[this.state.days[i][j]]);
+                    
+                    if(results[this.state.days[i][j]] === 2){
+                        
+                        if(this.state.valueStart === 0){
+                            this.setState({valueStart: j+6});
+                        }
+                    }else{
+                        if(this.state.valueStart !== 0){
+                            this.setState({valueStop: j+6});
+                            this.setState({valueDay: i});
+                            this.getEvent();
+                            this.setState({valueStart: 0});
+                            this.setState({valueStop: 0});
+                            this.setState({valueDay: 0});
+                        }
+                    }
+                }
+                if(this.state.valueStart !== 0){
+                    this.setState({valueStop: 24});
+                    this.setState({valueDay: i});
+                    this.getEvent();
+                    this.setState({valueStart: 0});
+                    this.setState({valueStop: 0});
+                    this.setState({valueDay: 0});
+                }
+                
+            }
+
+            this.setState({isReunion: false});
         });
 
     }
@@ -110,43 +147,50 @@ class Calendar extends Component {
         if (this.state.valueDay == 0){
             this.state.events.monday.push({
                 startTime: this.state.valueStart,
-                stopTime: this.state.valueStop
+                stopTime: this.state.valueStop,
+                isReunion: this.state.isReunion
             })
         }
         else if (this.state.valueDay == 1){
             this.state.events.tuesday.push({
                 startTime: this.state.valueStart,
-                stopTime: this.state.valueStop
+                stopTime: this.state.valueStop,
+                isReunion: this.state.isReunion
             })
         }
         else if (this.state.valueDay == 2){
             this.state.events.wednesday.push({
                 startTime: this.state.valueStart,
-                stopTime: this.state.valueStop
+                stopTime: this.state.valueStop,
+                isReunion: this.state.isReunion
             })
         }
         else if (this.state.valueDay == 3){
             this.state.events.thursday.push({
                 startTime: this.state.valueStart,
-                stopTime: this.state.valueStop
+                stopTime: this.state.valueStop,
+                isReunion: this.state.isReunion
             })
         }
         else if (this.state.valueDay == 4){
             this.state.events.friday.push({
                 startTime: this.state.valueStart,
-                stopTime: this.state.valueStop
+                stopTime: this.state.valueStop,
+                isReunion: this.state.isReunion
             })
         }
         else if (this.state.valueDay == 5){
             this.state.events.saturday.push({
                 startTime: this.state.valueStart,
-                stopTime: this.state.valueStop
+                stopTime: this.state.valueStop,
+                isReunion: this.state.isReunion
             })
         }
         else if (this.state.valueDay == 6){
             this.state.events.sunday.push({
                 startTime: this.state.valueStart,
-                stopTime: this.state.valueStop
+                stopTime: this.state.valueStop,
+                isReunion: this.state.isReunion
             })
         }
 
@@ -164,43 +208,50 @@ class Calendar extends Component {
             if (this.state.valueDay == 0){
                 this.state.events.monday.push({
                     startTime: this.state.valueStart,
-                    stopTime: this.state.valueStop
+                    stopTime: this.state.valueStop,
+                    isReunion: this.state.isReunion
                 })
             }
             else if (this.state.valueDay == 1){
                 this.state.events.tuesday.push({
                     startTime: this.state.valueStart,
-                    stopTime: this.state.valueStop
+                    stopTime: this.state.valueStop,
+                    isReunion: this.state.isReunion
                 })
             }
             else if (this.state.valueDay == 2){
                 this.state.events.wednesday.push({
                     startTime: this.state.valueStart,
-                    stopTime: this.state.valueStop
+                    stopTime: this.state.valueStop,
+                    isReunion: this.state.isReunion
                 })
             }
             else if (this.state.valueDay == 3){
                 this.state.events.thursday.push({
                     startTime: this.state.valueStart,
-                    stopTime: this.state.valueStop
+                    stopTime: this.state.valueStop,
+                    isReunion: this.state.isReunion
                 })
             }
             else if (this.state.valueDay == 4){
                 this.state.events.friday.push({
                     startTime: this.state.valueStart,
-                    stopTime: this.state.valueStop
+                    stopTime: this.state.valueStop,
+                    isReunion: this.state.isReunion
                 })
             }
             else if (this.state.valueDay == 5){
                 this.state.events.saturday.push({
                     startTime: this.state.valueStart,
-                    stopTime: this.state.valueStop
+                    stopTime: this.state.valueStop,
+                    isReunion: this.state.isReunion
                 })
             }
             else if (this.state.valueDay == 6){
                 this.state.events.sunday.push({
                     startTime: this.state.valueStart,
-                    stopTime: this.state.valueStop
+                    stopTime: this.state.valueStop,
+                    isReunion: this.state.isReunion
                 })
             }
         }

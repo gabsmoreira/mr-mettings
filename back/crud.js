@@ -9,6 +9,7 @@ var teamSchedules = [];
 var numberMembers = 0;
 var countQuery = 0;
 var countSchedules = 0;
+var duration = 0;
 
 var days = [["monday_6","monday_7","monday_8","monday_9","monday_10","monday_11","monday_12","monday_13","monday_14","monday_15","monday_16","monday_17","monday_18","monday_19","monday_20","monday_21","monday_22","monday_23"],
 ["tuesday_6","tuesday_7","tuesday_8","tuesday_9","tuesday_10","tuesday_11","tuesday_12","tuesday_13","tuesday_14","tuesday_15","tuesday_16","tuesday_17","tuesday_18","tuesday_19","tuesday_20","tuesday_21","tuesday_22","tuesday_23"],
@@ -33,7 +34,7 @@ app.listen(3001, function () {
 var connection = mysql.createConnection({
     host : 'localhost',
     user : 'root',
-    password : '1234',
+    password : '160520',
     database : 'mrmeetings'
     })
 
@@ -144,7 +145,7 @@ function updateSchedule(start, end, day, id, action){
                     if (error) throw error;
                     
                 });
-                if(action === 0){
+                if(action !== 1){
                     console.log('[BACKEND] Created event: ' + days[0][i-6]);
                 }else{
                     console.log('[BACKEND] Deleted event: ' + days[0][i-6]);
@@ -158,7 +159,7 @@ function updateSchedule(start, end, day, id, action){
                     if (error) throw error;
                     
                 });
-                if(action === 0){                         
+                if(action !== 1){                         
                     console.log('[BACKEND] Created event: ' + days[1][i-6]);                     
                 }else{
                     console.log('[BACKEND] Deleted event: ' + days[1][i-6]);                     
@@ -172,7 +173,7 @@ function updateSchedule(start, end, day, id, action){
                     if (error) throw error;
                     
                 });
-                if(action === 0){                         
+                if(action !== 1){                         
                     console.log('[BACKEND] Created event: ' + days[2][i-6]);                     
                 }else{                         
                     console.log('[BACKEND] Deleted event: ' + days[2][i-6]);                     
@@ -186,7 +187,7 @@ function updateSchedule(start, end, day, id, action){
                     if (error) throw error;
                     
                 });
-                if(action === 0){                         
+                if(action !== 1){                         
                     console.log('[BACKEND] Created event: ' + days[3][i-6]);                     
                 }else{                         
                     console.log('[BACKEND] Deleted event: ' + days[3][i-6]);                     
@@ -200,7 +201,7 @@ function updateSchedule(start, end, day, id, action){
                     if (error) throw error;
                     
                 });
-                if(action === 0){                         
+                if(action !== 1){                         
                     console.log('[BACKEND] Created event: ' + days[4][i-6]);                     
                 }else{                         
                     console.log('[BACKEND] Deleted event: ' + days[4][i-6]);                     
@@ -214,7 +215,7 @@ function updateSchedule(start, end, day, id, action){
                     if (error) throw error;
                     
                 });
-                if(action === 0){                         
+                if(action !== 1){                         
                     console.log('[BACKEND] Created event: ' + days[5][i-6]);                     
                 }else{                         
                     console.log('[BACKEND] Deleted event: ' + days[5][i-6]);                     
@@ -228,7 +229,7 @@ function updateSchedule(start, end, day, id, action){
                     if (error) throw error;
                     
                 });
-                if(action === 0){                         
+                if(action !== 1){                         
                     console.log('[BACKEND] Created event: ' + days[6][i-6]);                     
                 }else{                         
                     console.log('[BACKEND] Deleted event: ' + days[6][i-6]);                     
@@ -403,22 +404,32 @@ function getId(user) {
                     if (error) throw error;   
                 }); 
                 var reunion = findSpareTime();
-                var day = reunion[0]+reunion[1]+reunion[2];
-                var translateList = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
-                for(var i=0; i<7;i++){
-                    if(day === translateList[i]){
-                        day = i;
+                if(reunion.length>0){
+
+                    var day = reunion[0][0]+reunion[0][1]+reunion[0][2];
+                    var translateList = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+                    for(var i=0; i<7;i++){
+                        if(day === translateList[i]){
+                            day = i;
+                        }
                     }
-                }
-                if(reunion[reunion.length-2] === "_"){
-                    var start = reunion[reunion.length-1];
+                    for (r=0; r<reunion.length; r++){
+                        var part = reunion[r];
+                        
+                        if(part[part.length-2] === "_"){
+                            var start = part[part.length-1];
+                        }else{
+                            var start = part.substring(part.length-2,part.length);
+                        }
+                        start = parseInt(start);
+                        var end = start + 1;
+                        for(i = 1; i<numberMembers+1; i++){
+                            updateSchedule(start, end, day, listQuery[i], 2);
+                        }
+                    }
+
                 }else{
-                    var start = reunion.substring(reunion.length-2,reunion.length);
-                }
-                start = parseInt(start);
-                var end = start + 1;
-                for(var i = 1; i<numberMembers+1; i++){
-                    updateSchedule(start, end, day, listQuery[i], 0);
+                    console.log("NÃO TEM HORÁRIO LIVRE PARA ESSE TAMANHO DE REUNIÃO");
                 }
             }
         });
@@ -430,23 +441,45 @@ function getId(user) {
 function findSpareTime(){ // retorna o 1o horario livre de todos
     var spareTime = [];
     var firstMember = teamSchedules[0];
+    var isSpare = true;
+    var spare = []
+
     for(var i = 0; i<7; i++){
         for(var j = 0; j<18; j++){
             if(firstMember[days[i][j]] ===  1){
-                spareTime.push(days[i][j]);
+                isSpare = true;
+                spare = [days[i][j]];
+                for(var k = j+1; k<duration; k++){
+                    spare.push(days[i][k]);
+                    if(firstMember[days[i][k]] !== 1){
+                        isSpare = false;
+                    }
+                }
+                if(isSpare){
+                    spareTime.push(spare);
+                }
             }
         }
     }
 
-    for(var i = 1; i< numberMembers; i++){ // Todos os membros a partir do 2o
-        var schedule = teamSchedules[i];
-        for(var j=0; j<spareTime.length; j++){
-            if(schedule[spareTime[j]] === 0){
+    for(var m = 1; m< numberMembers; m++){ // Todos os membros a partir do 2o
+        var schedule = teamSchedules[m];
+        for(j=0; j<spareTime.length; j++){
+            spare = spareTime[j];
+            isSpare = true;
+            for(k=0; k<spare.length; k++){
+                if(schedule[spare[k]] !== 1){
+                    isSpare = false;
+                }
+            }
+            if(isSpare === false){
                 spareTime.splice(j,1);
                 j--;
             }
         }
     }
+
+    console.log(spareTime);
 
 
     return spareTime[0];
@@ -484,8 +517,9 @@ app.post('/registerGroup', function (req, res) {
         var members = req.body.members;
         numberMembers = req.body.numberMembers;
         listQuery =[title];
-        var members = JSON.stringify(members);
-        var members = JSON.parse(members);
+        members = JSON.stringify(members);
+        members = JSON.parse(members);
+        duration = req.body.duration;
         
         
         

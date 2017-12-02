@@ -1,5 +1,5 @@
 export default window.groupRegister = {
-    registerGroup:(title1, members1, numberMembers1,callback) => {
+    registerGroup:(title1, members1, numberMembers1, meetingDuration1, callback) => {
         console.log('Creating group',title1)
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -10,7 +10,8 @@ export default window.groupRegister = {
             body : JSON.stringify({
                 title: title1,
                 numberMembers: numberMembers1,
-                members: members1})
+                members: members1,
+                duration: meetingDuration1})
         }).then((response) => {
             var data = response.json().then((data) => {
                 // console.log(data)
