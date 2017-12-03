@@ -54,8 +54,10 @@ class App extends Component {
   }
 
   registerRequest = () => {
+    console.log("REQUESTANDO A REGISTERACAO DOS BANG");
     auth.register(this.state.textFields.email, this.state.textFields.password, this.state.textFields.name,(result) => {
       console.log(result.name);
+      
       localStorage.setItem("id", result);
       this.setState({auth: localStorage.getItem("id")});
       

@@ -20,7 +20,8 @@ class Event extends Component {
     this.state = {
       error : '',   
       hidden: false,
-      startTime: this.props.startTime
+      startTime: this.props.startTime,
+      reunion: this.props.isReunion
     }
   }
 
@@ -51,11 +52,11 @@ class Event extends Component {
             <div>
                 {this.state.hidden ? null : 
             <Chip
-            backgroundColor={this.props.isReunion? blue400:amber400}
+            backgroundColor={this.state.reunion? blue400:amber400}
             onRequestDelete={this.handleRequestDelete}
             onClick={this.handleTouchTap.bind(this)}
             style={styles.chip}>
-                <Avatar size={32} color={'black'} backgroundColor={this.props.isReunion? blue700:amber700}>
+                <Avatar size={32} color={'black'} backgroundColor={this.state.reunion? blue700:amber700}>
                 </Avatar>
                 {this.props.startTime + ':00'} - {this.props.stopTime + ':00'}
             </Chip>} 

@@ -31,6 +31,7 @@ class LoginForm extends Component {
   }
 
   registerRequest = () => {
+      console.log("REQUESTANDO A REGISTERACAO DOS BANG dscds");
       auth.register(this.state.textFields.email, this.state.textFields.password, this.state.textFields.name,(result) => {
         this.setState({auth: result});
         localStorage.setItem("user", result);

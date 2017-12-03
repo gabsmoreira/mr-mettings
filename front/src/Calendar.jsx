@@ -415,49 +415,49 @@ class Calendar extends Component {
                         <TableRowColumn style={tableRowStyle}>
                             <div>
                             {this.state.events.monday.map( (row,index) => (
-                                <Event startTime={String(row.startTime)} stopTime={String(row.stopTime)} day={0}/>
+                                <Event startTime={String(row.startTime)} stopTime={String(row.stopTime)} day={0} isReunion={this.state.isReunion}/>
                                 ))}
                             </div>
                         </TableRowColumn>
                         <TableRowColumn style={tableRowStyle}>
                             <div>
                             {this.state.events.tuesday.map( (row,index) => (
-                                <Event startTime={String(row.startTime)} stopTime={String(row.stopTime)} day={1}/>
+                                <Event startTime={String(row.startTime)} stopTime={String(row.stopTime)} day={1} isReunion={this.state.isReunion}/>
                                 ))}
                             </div>
                         </TableRowColumn>
                         <TableRowColumn style={tableRowStyle}>
                             <div>
                             {this.state.events.wednesday.map( (row,index) => (
-                                <Event startTime={String(row.startTime)} stopTime={String(row.stopTime)} day={2}/>
+                                <Event startTime={String(row.startTime)} stopTime={String(row.stopTime)} day={2} isReunion={this.state.isReunion}/>
                                 ))}
                             </div>
                         </TableRowColumn>
                         <TableRowColumn style={tableRowStyle}>
                             <div>
                             {this.state.events.thursday.map( (row,index) => (
-                                <Event startTime={String(row.startTime)} stopTime={String(row.stopTime)} day={3}/>
+                                <Event startTime={String(row.startTime)} stopTime={String(row.stopTime)} day={3} isReunion={this.state.isReunion}/>
                                 ))}
                             </div>
                         </TableRowColumn>
                         <TableRowColumn style={tableRowStyle}>
                             <div>
                             {this.state.events.friday.map( (row,index) => (
-                                <Event startTime={String(row.startTime)} stopTime={String(row.stopTime)} day={4}/>
+                                <Event startTime={String(row.startTime)} stopTime={String(row.stopTime)} day={4} isReunion={this.state.isReunion}/>
                                 ))}
                             </div>
                         </TableRowColumn>
                         <TableRowColumn style={tableRowStyle}>
                             <div>
                             {this.state.events.saturday.map( (row,index) => (
-                                <Event startTime={String(row.startTime)} stopTime={String(row.stopTime)} day={5}/>
+                                <Event startTime={String(row.startTime)} stopTime={String(row.stopTime)} day={5} isReunion={this.state.isReunion}/>
                                 ))}
                             </div>
                         </TableRowColumn>
                         <TableRowColumn style={tableRowStyle}>
                             <div>
                             {this.state.events.sunday.map( (row,index) => (
-                                <Event startTime={String(row.startTime)} stopTime={String(row.stopTime)} day={6}/>
+                                <Event startTime={String(row.startTime)} stopTime={String(row.stopTime)} day={6} isReunion={this.state.isReunion}/>
                                 ))}
                             </div>
                         </TableRowColumn>

@@ -445,23 +445,31 @@ function findSpareTime(){ // retorna o 1o horario livre de todos
     var isSpare = true;
     var spare = []
 
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+    console.log(teamSchedules);
+
     for(var i = 0; i<7; i++){
         for(var j = 0; j<18; j++){
             if(firstMember[days[i][j]] ===  1){
                 isSpare = true;
                 spare = [days[i][j]];
-                for(var k = j+1; k<duration; k++){
-                    spare.push(days[i][k]);
-                    if(firstMember[days[i][k]] !== 1){
-                        isSpare = false;
+                if(j <= 18-duration){
+                    for(var k = j+1; k<j+duration; k++){
+                        spare.push(days[i][k]);
+                        if(firstMember[days[i][k]] !== 1){
+                            isSpare = false;
+                        }
                     }
-                }
-                if(isSpare){
-                    spareTime.push(spare);
+                    if(isSpare){
+                        spareTime.push(spare);
+                    }
                 }
             }
         }
     }
+
+    console.log("CRUD 466: (só do 1o)");
+    console.log(spareTime);
 
     for(var m = 1; m< numberMembers; m++){ // Todos os membros a partir do 2o
         var schedule = teamSchedules[m];
@@ -480,6 +488,7 @@ function findSpareTime(){ // retorna o 1o horario livre de todos
         }
     }
 
+    console.log("CRUD 486: ");
     console.log(spareTime);
 
 
@@ -521,6 +530,7 @@ app.post('/registerGroup', function (req, res) {
         members = JSON.stringify(members);
         members = JSON.parse(members);
         duration = req.body.duration;
+        teamSchedules = [];
         
         
         
