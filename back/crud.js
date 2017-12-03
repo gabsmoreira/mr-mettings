@@ -462,6 +462,9 @@ function findSpareTime(){ // retorna o 1o horario livre de todos
         }
     }
 
+    console.log("CRUD 466: (só do 1o)");
+    console.log(spareTime);
+
     for(var m = 1; m< numberMembers; m++){ // Todos os membros a partir do 2o
         var schedule = teamSchedules[m];
         for(j=0; j<spareTime.length; j++){
@@ -479,6 +482,7 @@ function findSpareTime(){ // retorna o 1o horario livre de todos
         }
     }
 
+    console.log("CRUD 486: ");
     console.log(spareTime);
 
 

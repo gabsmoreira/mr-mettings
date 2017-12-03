@@ -24,7 +24,7 @@ CREATE TABLE Schedule (
     monday_13 BOOLEAN DEFAULT 1,
     monday_14 BOOLEAN DEFAULT 1,
     monday_15 BOOLEAN DEFAULT 1,
-    monday_16 BOOLEAN DEFAULT 1,
+    monday_16 BOOLEAN DEFAULT 1,    
     monday_17 BOOLEAN DEFAULT 1,
     monday_18 BOOLEAN DEFAULT 1,
     monday_19 BOOLEAN DEFAULT 1,
