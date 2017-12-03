@@ -8,9 +8,15 @@ import {
   import RaisedButton from 'material-ui/RaisedButton';
   import FlatButton from 'material-ui/FlatButton';
   import TextField from 'material-ui/TextField';
-import {orange500, blue500} from 'material-ui/styles/colors';
+import {orange500, blue500, darkBlack} from 'material-ui/styles/colors';
 import Slider from 'material-ui/Slider';
 import groupRegister from './groupRegister'
+import Paper from 'material-ui/Paper';
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
+import { isNullOrUndefined } from 'util';
+import DropDownMenu from 'material-ui/DropDownMenu';
+
 
 
 const styles = {
@@ -40,6 +46,9 @@ class GroupForm extends Component {
         meetingDuration: 1,
         multipleHours: false,
         title: null,
+        users: null,
+        form: null,
+        suggestions: [],
         members: {
             member1: null,
             member2: null,
@@ -53,6 +62,18 @@ class GroupForm extends Component {
             member10: null,
         },  
         }
+    }
+
+    componentWillMount = () => {
+        groupRegister.getUsers((result)=>{
+            var usersList = [];
+            for (var i = 0; i< result.length; i++){
+               usersList.push(result[i].name);
+            }
+            this.setState({users: usersList})
+            
+        })
+
     }
 
     
@@ -115,11 +136,39 @@ class GroupForm extends Component {
     
 
     handleMember = (event) => {
+        this.setState({suggestions: null});
+        this.setState({form: event.target.id})
+        var newList = []
         this.setState({ ...this.state, members: 
           { ...this.state.members,[event.target.id] : event.target.value }}
         )
-      }
+        // console.log({ ...this.state.members,[event.target.id] : event.target.value });
+        console.log(event.target.value)
+        for (var i = 0; i<this.state.users.length; i++){
+            if(String(this.state.users[i]).includes(event.target.value)){
+                newList.push(this.state.users[i]);
+                this.setState({suggestions: newList})
     
+                }
+            
+            
+        }
+      }
+
+      handleClickSuggestion=() =>{
+          this.setState({})
+      }
+
+      renderSuggestions(){
+          if (this.state.suggestions.length < 19){
+            return(
+            <DropDownMenu value={this.state.valueStop} onChange={this.handleChangeStop}>
+                {this.state.suggestions.map( (row,index) => (
+                    <MenuItem value={index} primaryText={row} onClick={this.handleClickSuggestion} />
+                    ))}
+            </DropDownMenu>
+                )}
+      }
 
     renderFormMembers(num) {
         let FormMembers = [];
@@ -137,8 +186,12 @@ class GroupForm extends Component {
             
           );
         }
-        return (
-          <div>{FormMembers}</div>
+        return (<div>
+            <div>{FormMembers}</div>
+          {this.renderSuggestions()}
+        </div>
+
+          
         );
       };
       

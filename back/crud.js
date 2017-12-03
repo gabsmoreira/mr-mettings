@@ -34,7 +34,7 @@ app.listen(3001, function () {
 var connection = mysql.createConnection({
     host : 'localhost',
     user : 'root',
-    password : '160520',
+    password : '1234',
     database : 'mrmeetings'
     })
 
@@ -408,6 +408,7 @@ function getId(user) {
 
                     var day = reunion[0][0]+reunion[0][1]+reunion[0][2];
                     var translateList = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+                    console.log(day);
                     for(var i=0; i<7;i++){
                         if(day === translateList[i]){
                             day = i;
