@@ -90,109 +90,94 @@ class GroupForm extends Component {
         });
 
         if(this.state.stepIndex === 3){
+            // console.log(this.refs.member1.state.searchText);
             switch (this.state.numberOfMembers) {
                 case 2:
-                    this.setState({members:{
-                        member1 : this.refs.member1.state.searchText,
-                        member2 : this.refs.member2.state.searchText
-                    }})
+                    this.state.members.member1 = this.refs.member1.state.searchText;
+                    this.state.members.member2 = this.refs.member2.state.searchText;
                     break;
 
                 case 3:
-                    this.setState({members:{
-                        member1 : this.refs.member1.state.searchText,
-                        member2 : this.refs.member2.state.searchText,
-                        member3 : this.refs.member3.state.searchText,
-                    }})
+                    this.state.members.member1 = this.refs.member1.state.searchText;
+                    this.state.members.member2 = this.refs.member2.state.searchText;
+                    this.state.members.member3 = this.refs.member3.state.searchText;
                     break;
                 
                 case 4:
-                    this.setState({members:{
-                        member1 : this.refs.member1.state.searchText,
-                        member2 : this.refs.member2.state.searchText,
-                        member3 : this.refs.member3.state.searchText,
-                        member4 : this.refs.member4.state.searchText,
-                    }})
+                    this.state.members.member1 = this.refs.member1.state.searchText;
+                    this.state.members.member2 = this.refs.member2.state.searchText;
+                    this.state.members.member3 = this.refs.member3.state.searchText;
+                    this.state.members.member4 = this.refs.member4.state.searchText;
                     break;
 
                 case 5:
-                    this.setState({members:{
-                        member1 : this.refs.member1.state.searchText,
-                        member2 : this.refs.member2.state.searchText,
-                        member3 : this.refs.member3.state.searchText,
-                        member4 : this.refs.member4.state.searchText,
-                        member5 : this.refs.member5.state.searchText,
-                    }})
+                    this.state.members.member1 = this.refs.member1.state.searchText;
+                    this.state.members.member2 = this.refs.member2.state.searchText;
+                    this.state.members.member3 = this.refs.member3.state.searchText;
+                    this.state.members.member4 = this.refs.member4.state.searchText;
+                    this.state.members.member5 = this.refs.member5.state.searchText;
                     break;
 
                 case 6:
-                    this.setState({members:{
-                        member1 : this.refs.member1.state.searchText,
-                        member2 : this.refs.member2.state.searchText,
-                        member3 : this.refs.member3.state.searchText,
-                        member4 : this.refs.member4.state.searchText,
-                        member5 : this.refs.member5.state.searchText,
-                        member6 : this.refs.member6.state.searchText,
-                    }})
+                    this.state.members.member1 = this.refs.member1.state.searchText;
+                    this.state.members.member2 = this.refs.member2.state.searchText;
+                    this.state.members.member3 = this.refs.member3.state.searchText;
+                    this.state.members.member4 = this.refs.member4.state.searchText;
+                    this.state.members.member5 = this.refs.member5.state.searchText;
+                    this.state.members.member6 = this.refs.member6.state.searchText;
                     break;
                 
                 case 7:
-                    this.setState({members:{
-                        member1 : this.refs.member1.state.searchText,
-                        member2 : this.refs.member2.state.searchText,
-                        member3 : this.refs.member3.state.searchText,
-                        member4 : this.refs.member4.state.searchText,
-                        member5 : this.refs.member5.state.searchText,
-                        member6 : this.refs.member6.state.searchText,
-                        member7 : this.refs.member7.state.searchText,
-                    }})
+                    this.state.members.member1 = this.refs.member1.state.searchText;
+                    this.state.members.member2 = this.refs.member2.state.searchText;
+                    this.state.members.member3 = this.refs.member3.state.searchText;
+                    this.state.members.member4 = this.refs.member4.state.searchText;
+                    this.state.members.member5 = this.refs.member5.state.searchText;
+                    this.state.members.member6 = this.refs.member6.state.searchText;
+                    this.state.members.member7 = this.refs.member7.state.searchText;
                     break;
 
                 case 8:
-                    this.setState({members:{
-                        member1 : this.refs.member1.state.searchText,
-                        member2 : this.refs.member2.state.searchText,
-                        member3 : this.refs.member3.state.searchText,
-                        member4 : this.refs.member4.state.searchText,
-                        member5 : this.refs.member5.state.searchText,
-                        member6 : this.refs.member6.state.searchText,
-                        member7 : this.refs.member7.state.searchText,
-                        member8 : this.refs.member8.state.searchText,
-                    }})
+                    this.state.members.member1 = this.refs.member1.state.searchText;
+                    this.state.members.member2 = this.refs.member2.state.searchText;
+                    this.state.members.member3 = this.refs.member3.state.searchText;
+                    this.state.members.member4 = this.refs.member4.state.searchText;
+                    this.state.members.member5 = this.refs.member5.state.searchText;
+                    this.state.members.member6 = this.refs.member6.state.searchText;
+                    this.state.members.member7 = this.refs.member7.state.searchText;
+                    this.state.members.member8 = this.refs.member8.state.searchText;
                     break;
 
                 case 9:
-                    this.setState({members:{
-                        member1 : this.refs.member1.state.searchText,
-                        member2 : this.refs.member2.state.searchText,
-                        member3 : this.refs.member3.state.searchText,
-                        member4 : this.refs.member4.state.searchText,
-                        member5 : this.refs.member5.state.searchText,
-                        member6 : this.refs.member6.state.searchText,
-                        member7 : this.refs.member7.state.searchText,
-                        member8 : this.refs.member8.state.searchText,
-                        member9 : this.refs.member9.state.searchText,
-                    }})
+                    this.state.members.member1 = this.refs.member1.state.searchText;
+                    this.state.members.member2 = this.refs.member2.state.searchText;
+                    this.state.members.member3 = this.refs.member3.state.searchText;
+                    this.state.members.member4 = this.refs.member4.state.searchText;
+                    this.state.members.member5 = this.refs.member5.state.searchText;
+                    this.state.members.member6 = this.refs.member6.state.searchText;
+                    this.state.members.member7 = this.refs.member7.state.searchText;
+                    this.state.members.member8 = this.refs.member8.state.searchText;
+                    this.state.members.member9 = this.refs.member9.state.searchText;
                     break;
 
                 case 10:
-                    this.setState({members:{
-                        member1 : this.refs.member1.state.searchText,
-                        member2 : this.refs.member2.state.searchText,
-                        member3 : this.refs.member3.state.searchText,
-                        member4 : this.refs.member4.state.searchText,
-                        member5 : this.refs.member5.state.searchText,
-                        member6 : this.refs.member6.state.searchText,
-                        member7 : this.refs.member7.state.searchText,
-                        member8 : this.refs.member8.state.searchText,
-                        member9 : this.refs.member9.state.searchText,
-                        member10 : this.refs.member10.state.searchText,
-                    }})
+                    this.state.members.member1 = this.refs.member1.state.searchText;
+                    this.state.members.member2 = this.refs.member2.state.searchText;
+                    this.state.members.member3 = this.refs.member3.state.searchText;
+                    this.state.members.member4 = this.refs.member4.state.searchText;
+                    this.state.members.member5 = this.refs.member5.state.searchText;
+                    this.state.members.member6 = this.refs.member6.state.searchText;
+                    this.state.members.member7 = this.refs.member7.state.searchText;
+                    this.state.members.member8 = this.refs.member8.state.searchText;
+                    this.state.members.member9 = this.refs.member9.state.searchText;
+                    this.state.members.member10 = this.refs.member10.state.searchText;
                     break;
                 default:
                     break;
             }
             // console.log(this.refs.member1);
+            console.log("MEMBERS:");
+            console.log(this.state.members);
             groupRegister.registerGroup(this.state.title,this.state.members, this.state.numberOfMembers, this.state.meetingDuration);
         }
     };
