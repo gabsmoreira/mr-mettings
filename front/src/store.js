@@ -4,7 +4,7 @@ export default window.auth = {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        fetch(baseUrl + '/updateSchedule', {
+        fetch(baseUrl + 'updateSchedule', {
             method: 'POST',
             headers,
             body : JSON.stringify({
@@ -27,7 +27,7 @@ export default window.auth = {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        fetch(baseUrl + '/findSchedule', {
+        fetch(baseUrl + 'findSchedule', {
             method: 'POST',
             headers,
             body : JSON.stringify({

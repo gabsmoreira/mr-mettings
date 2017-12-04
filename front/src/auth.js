@@ -4,7 +4,7 @@ export default window.auth = {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        fetch(baseUrl + '/login', {
+        fetch(baseUrl + 'login', {
             method: 'POST',
             headers,
             body : JSON.stringify({
