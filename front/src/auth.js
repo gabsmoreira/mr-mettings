@@ -1,6 +1,6 @@
 export default window.auth = {
     login:(name1, password1, callback)=>{
-        const baseUrl ='http://localhost:3001';
+        const baseUrl ='https://mr-meetings-back.herokuapp.com/';
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
@@ -23,7 +23,7 @@ export default window.auth = {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        fetch("http://localhost:3001/register", {
+        fetch("https://mr-meetings-back.herokuapp.com/register", {
             method: 'POST',
             headers,
             body : JSON.stringify({

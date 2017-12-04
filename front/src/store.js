@@ -1,6 +1,6 @@
 export default window.auth = {
     updateSchedule:(day1, start1, stop1, action1, callback)=>{
-        const baseUrl ='http://localhost:3001';
+        const baseUrl ='https://mr-meetings-back.herokuapp.com/';
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
@@ -23,7 +23,7 @@ export default window.auth = {
     },
 
     getEvents:(callback)=>{
-        const baseUrl ='http://localhost:3001';
+        const baseUrl ='https://mr-meetings-back.herokuapp.com/';
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
 

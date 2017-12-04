@@ -4,7 +4,7 @@
   "description": "",
   "main": "crud.js",
   "engines": {
-    "node": "4.1.1"
+    "node": "9.2.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.2",
+    "mailgun-js": "^0.13.1",
     "mysql": "^2.15.0"
   }
 }
