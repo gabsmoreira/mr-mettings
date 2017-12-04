@@ -1,4 +1,5 @@
 
+
 // Require stuff
 var express = require('express');
 var app = express();
@@ -10,6 +11,7 @@ var numberMembers = 0;
 var countQuery = 0;
 var countSchedules = 0;
 var duration = 0;
+var meetingName = "";
 
 var days = [["monday_6","monday_7","monday_8","monday_9","monday_10","monday_11","monday_12","monday_13","monday_14","monday_15","monday_16","monday_17","monday_18","monday_19","monday_20","monday_21","monday_22","monday_23"],
 ["tuesday_6","tuesday_7","tuesday_8","tuesday_9","tuesday_10","tuesday_11","tuesday_12","tuesday_13","tuesday_14","tuesday_15","tuesday_16","tuesday_17","tuesday_18","tuesday_19","tuesday_20","tuesday_21","tuesday_22","tuesday_23"],
@@ -19,6 +21,12 @@ var days = [["monday_6","monday_7","monday_8","monday_9","monday_10","monday_11"
 ["saturday_6","saturday_7","saturday_8","saturday_9","saturday_10","saturday_11","saturday_12","saturday_13","saturday_14","saturday_15","saturday_16","saturday_17","saturday_18","saturday_19","saturday_20","saturday_21","saturday_22","saturday_23"],
 ["sunday_6","sunday_7","sunday_8","sunday_9","sunday_10","sunday_11","sunday_12","sunday_13","sunday_14","sunday_15","sunday_16","sunday_17","sunday_18","sunday_19","sunday_20","sunday_21","sunday_22","sunday_23"]  
 ];
+
+var mailgun = require("mailgun-js");
+var api_key = 'key-de72338c2fa84b7f3d13eded05975dbb';
+var DOMAIN = 'sandbox0bf6a56b0a8244ff94f7bec3da0dec2e.mailgun.org';
+var mailgun = require('mailgun-js')({apiKey: api_key, domain: DOMAIN});
+
 
 
 app.use(bodyParser.json())
@@ -48,6 +56,8 @@ app.get('/user', function (req, res) {
     });
 
 
+        
+
 // CRIA
 app.post('/register', function (req, res) {
     var name = req.body.name;
@@ -72,9 +82,6 @@ app.post('/register', function (req, res) {
             }); 
     }); 
 
-
-
-    
 
 });
     
@@ -444,8 +451,8 @@ function findSpareTime(){ // retorna o 1o horario livre de todos
     var isSpare = true;
     var spare = []
 
-    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-    console.log(teamSchedules);
+    // console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+    // console.log(teamSchedules);
 
     for(var i = 0; i<7; i++){
         for(var j = 0; j<18; j++){
@@ -467,8 +474,8 @@ function findSpareTime(){ // retorna o 1o horario livre de todos
         }
     }
 
-    console.log("CRUD 466: (só do 1o)");
-    console.log(spareTime);
+    // console.log("CRUD 466: (só do 1o)");
+    // console.log(spareTime);
 
     for(var m = 1; m< numberMembers; m++){ // Todos os membros a partir do 2o
         var schedule = teamSchedules[m];
@@ -487,8 +494,8 @@ function findSpareTime(){ // retorna o 1o horario livre de todos
         }
     }
 
-    console.log("CRUD 486: ");
-    console.log(spareTime);
+    // console.log("CRUD 486: ");
+    // console.log(spareTime);
 
 
     return spareTime[0];
@@ -516,16 +523,45 @@ function makeQueryString(){
 
 }
 
+function sendEmail(name){
+
+    //console.log("ENTREI AQUI!");
+    
+    connection.query("SELECT email FROM User WHERE name=?",[name], function (error, results, fields) {
+        if (error) callback(error,null); 
+        else{
+
+            var jorge = JSON.stringify(results);
+            var json = JSON.parse(jorge);
+            email = json[0]['email'];
+            
+            var data = {
+                from: 'MrMeetings <me@samples.mailgun.org>',
+                to: email,
+                subject: name + ', você foi inserido em uma reunião!',
+                text: 'Você foi inserido na reunião: "' + meetingName + '", entre no MrMeetings para ver o horário dela!'
+                };
+                
+                mailgun.messages().send(data, function (error, body) {
+                console.log(body);
+                });
+            
+        }  
+            
+    });
+
+}
+
 // CRIA GRUPO
 app.post('/registerGroup', function (req, res) {
 
         countQuery = 0;
         countSchedules = 0;
 
-        var title = req.body.title;
+        meetingName = req.body.title;
         var members = req.body.members;
         numberMembers = req.body.numberMembers;
-        listQuery =[title];
+        listQuery =[meetingName];
         members = JSON.stringify(members);
         members = JSON.parse(members);
         duration = req.body.duration;
@@ -535,6 +571,7 @@ app.post('/registerGroup', function (req, res) {
         
         for(var i = 1; i< numberMembers + 1; i++){
             getId(members['member' + String(i)]);
+            sendEmail(members['member' + String(i)]);
         }
 
 
