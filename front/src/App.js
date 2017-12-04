@@ -59,6 +59,7 @@ class App extends Component {
       console.log(result.name);
       
       localStorage.setItem("id", result);
+      console.log(result)
       this.setState({auth: localStorage.getItem("id")});
       
     })
