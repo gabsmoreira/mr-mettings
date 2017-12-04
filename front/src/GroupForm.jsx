@@ -358,17 +358,14 @@ class GroupForm extends Component {
             </Stepper>
             <div style={contentStyle}>
             {finished ? (
+                <div>
                 <p>
-                    <a
-                        href="#"
-                        onClick={(event) => {
-                        event.preventDefault();
-                        this.setState({stepIndex: 0, finished: false});
-                        }}
-                    >
-                        Click here
-                    </a> to reset the example.
+                    A reunião {this.state.title} foi criada!
                 </p>
+                <p>
+                     Ela está alocada no seu calendário em azul.
+                </p>
+                </div>
             ) : ( 
                 <div>
                     <p>{this.getStepContent(stepIndex)}</p>
