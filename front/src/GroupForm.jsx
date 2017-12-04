@@ -8,9 +8,17 @@ import {
   import RaisedButton from 'material-ui/RaisedButton';
   import FlatButton from 'material-ui/FlatButton';
   import TextField from 'material-ui/TextField';
-import {orange500, blue500} from 'material-ui/styles/colors';
+import {orange500, blue500, darkBlack} from 'material-ui/styles/colors';
 import Slider from 'material-ui/Slider';
 import groupRegister from './groupRegister'
+import Paper from 'material-ui/Paper';
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
+import { isNullOrUndefined } from 'util';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import AutoComplete from 'material-ui/AutoComplete';
+
+
 
 
 const styles = {
@@ -40,6 +48,10 @@ class GroupForm extends Component {
         meetingDuration: 1,
         multipleHours: false,
         title: null,
+        users: null,
+        form: null,
+        dataSource: [],
+        suggestions: [],
         members: {
             member1: null,
             member2: null,
@@ -55,6 +67,18 @@ class GroupForm extends Component {
         }
     }
 
+    componentWillMount = () => {
+        groupRegister.getUsers((result)=>{
+            var usersList = [];
+            for (var i = 0; i< result.length; i++){
+               usersList.push(result[i].name);
+            }
+            this.setState({users: usersList})
+            
+        })
+
+    }
+
     
 
     handleNext = () => {
@@ -66,7 +90,94 @@ class GroupForm extends Component {
         });
 
         if(this.state.stepIndex === 3){
-            
+            // console.log(this.refs.member1.state.searchText);
+            switch (this.state.numberOfMembers) {
+                case 2:
+                    this.state.members.member1 = this.refs.member1.state.searchText;
+                    this.state.members.member2 = this.refs.member2.state.searchText;
+                    break;
+
+                case 3:
+                    this.state.members.member1 = this.refs.member1.state.searchText;
+                    this.state.members.member2 = this.refs.member2.state.searchText;
+                    this.state.members.member3 = this.refs.member3.state.searchText;
+                    break;
+                
+                case 4:
+                    this.state.members.member1 = this.refs.member1.state.searchText;
+                    this.state.members.member2 = this.refs.member2.state.searchText;
+                    this.state.members.member3 = this.refs.member3.state.searchText;
+                    this.state.members.member4 = this.refs.member4.state.searchText;
+                    break;
+
+                case 5:
+                    this.state.members.member1 = this.refs.member1.state.searchText;
+                    this.state.members.member2 = this.refs.member2.state.searchText;
+                    this.state.members.member3 = this.refs.member3.state.searchText;
+                    this.state.members.member4 = this.refs.member4.state.searchText;
+                    this.state.members.member5 = this.refs.member5.state.searchText;
+                    break;
+
+                case 6:
+                    this.state.members.member1 = this.refs.member1.state.searchText;
+                    this.state.members.member2 = this.refs.member2.state.searchText;
+                    this.state.members.member3 = this.refs.member3.state.searchText;
+                    this.state.members.member4 = this.refs.member4.state.searchText;
+                    this.state.members.member5 = this.refs.member5.state.searchText;
+                    this.state.members.member6 = this.refs.member6.state.searchText;
+                    break;
+                
+                case 7:
+                    this.state.members.member1 = this.refs.member1.state.searchText;
+                    this.state.members.member2 = this.refs.member2.state.searchText;
+                    this.state.members.member3 = this.refs.member3.state.searchText;
+                    this.state.members.member4 = this.refs.member4.state.searchText;
+                    this.state.members.member5 = this.refs.member5.state.searchText;
+                    this.state.members.member6 = this.refs.member6.state.searchText;
+                    this.state.members.member7 = this.refs.member7.state.searchText;
+                    break;
+
+                case 8:
+                    this.state.members.member1 = this.refs.member1.state.searchText;
+                    this.state.members.member2 = this.refs.member2.state.searchText;
+                    this.state.members.member3 = this.refs.member3.state.searchText;
+                    this.state.members.member4 = this.refs.member4.state.searchText;
+                    this.state.members.member5 = this.refs.member5.state.searchText;
+                    this.state.members.member6 = this.refs.member6.state.searchText;
+                    this.state.members.member7 = this.refs.member7.state.searchText;
+                    this.state.members.member8 = this.refs.member8.state.searchText;
+                    break;
+
+                case 9:
+                    this.state.members.member1 = this.refs.member1.state.searchText;
+                    this.state.members.member2 = this.refs.member2.state.searchText;
+                    this.state.members.member3 = this.refs.member3.state.searchText;
+                    this.state.members.member4 = this.refs.member4.state.searchText;
+                    this.state.members.member5 = this.refs.member5.state.searchText;
+                    this.state.members.member6 = this.refs.member6.state.searchText;
+                    this.state.members.member7 = this.refs.member7.state.searchText;
+                    this.state.members.member8 = this.refs.member8.state.searchText;
+                    this.state.members.member9 = this.refs.member9.state.searchText;
+                    break;
+
+                case 10:
+                    this.state.members.member1 = this.refs.member1.state.searchText;
+                    this.state.members.member2 = this.refs.member2.state.searchText;
+                    this.state.members.member3 = this.refs.member3.state.searchText;
+                    this.state.members.member4 = this.refs.member4.state.searchText;
+                    this.state.members.member5 = this.refs.member5.state.searchText;
+                    this.state.members.member6 = this.refs.member6.state.searchText;
+                    this.state.members.member7 = this.refs.member7.state.searchText;
+                    this.state.members.member8 = this.refs.member8.state.searchText;
+                    this.state.members.member9 = this.refs.member9.state.searchText;
+                    this.state.members.member10 = this.refs.member10.state.searchText;
+                    break;
+                default:
+                    break;
+            }
+            // console.log(this.refs.member1);
+            console.log("MEMBERS:");
+            console.log(this.state.members);
             groupRegister.registerGroup(this.state.title,this.state.members, this.state.numberOfMembers, this.state.meetingDuration);
         }
     };
@@ -114,31 +225,53 @@ class GroupForm extends Component {
 
     
 
-    handleMember = (event) => {
-        this.setState({ ...this.state, members: 
-          { ...this.state.members,[event.target.id] : event.target.value }}
-        )
+    handleMember = (target) => {
+        console.log(target)
+        // this.setState({ ...this.state, members: 
+        //     { ...this.state.members,[event.target.id] : event.target.value }}
+        //   )   
+            
       }
-    
 
+      handleUpdateInput = (value, event1,event2) => {
+          console.log(event1);
+          console.log(event2);
+        this.setState({suggestions: null});
+        var newList = []
+        for (var i = 0; i<this.state.users.length; i++){
+            if(String(this.state.users[i]).includes(value)){
+                newList.push(this.state.users[i]);
+                }
+        }
+        this.setState({suggestions: newList});
+
+        
+      };
+
+
+
+      
+
+     
     renderFormMembers(num) {
         let FormMembers = [];
         for(let i= 1; i < num + 1; i++) {
           FormMembers.push(
               <div>
-                  <TextField
+                <AutoComplete
+                    ref = {'member' + String(i)}
                     id={'member' + String(i)}
                     hintText={"Membro " + String(i)}
-                    underlineFocusStyle={styles.underlineStyle}
-                    onChange={this.handleMember}
-                    
-                /><br />
+                    dataSource={this.state.suggestions}
+                    onUpdateInput={this.handleUpdateInput}                
+                />
+                 <br />
               </div>
-            
           );
         }
-        return (
-          <div>{FormMembers}</div>
+        return (<div>
+            <div>{FormMembers}</div>
+        </div>
         );
       };
       

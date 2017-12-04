@@ -18,6 +18,20 @@ export default window.groupRegister = {
             callback(data)
             })
         })
+    },
+
+    getUsers:(callback) => {
+        const headers = new Headers();
+        // headers.append('Content-Type', 'application/json');
+
+        fetch("http://localhost:3001/user", {
+            method: 'GET'
+        }).then((response) => {
+            var data = response.json().then((data) => {
+                // console.log(data)
+            callback(data)
+            })
+        })
     }
 }
 
